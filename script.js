@@ -1,727 +1,772 @@
-const progress = document.querySelector(".page-progress span");
-const reveals = document.querySelectorAll(".reveal");
-const heroVisual = document.querySelector(".hero-visual");
-const counters = document.querySelectorAll("[data-counter]");
-const charts = document.querySelectorAll(".line-chart");
-const multiLineCharts = document.querySelectorAll(".multi-line-chart");
-const mascot = document.querySelector(".mascot-guide");
-const mascotImage = document.querySelector("#mascotImage");
-const mascotMessage = document.querySelector("#mascotMessage");
-const guideSections = document.querySelectorAll("[data-guide]");
-const canvas = document.querySelector("#ambientCanvas");
-const ctx = canvas?.getContext("2d");
-const mobileAccordionItems = document.querySelectorAll("#workflow .workflow-step, .credential-list article");
-const mobileMedia = window.matchMedia("(max-width: 660px)");
-const experienceTabs = document.querySelectorAll(".experience-tab");
-const experiencePanels = document.querySelectorAll(".experience-detail");
-const emailActions = document.querySelectorAll(".email-action");
-const detailButtons = document.querySelectorAll("[data-modal]");
-const experienceModal = document.querySelector("#experienceModal");
-const modalTitle = document.querySelector("#modalTitle");
-const modalEyebrow = document.querySelector("#modalEyebrow");
-const modalBody = document.querySelector("#modalBody");
-const modalCloseButtons = document.querySelectorAll("[data-modal-close]");
-const chartTooltip = document.createElement("div");
+(() => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = window.matchMedia('(pointer: fine)').matches;
+  const header = document.querySelector('.site-header');
+  const progress = document.querySelector('.page-progress span');
+  const navToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  const sectionIds = ['experience', 'case-studies', 'process', 'career', 'contact'];
 
-let canvasWidth = 0;
-let canvasHeight = 0;
-let particles = [];
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-let activeGuideSection = null;
-const mascotPoses = {
-  intro: "assets/mascot-intro.png",
-  about: "assets/mascot-about.png",
-  timeline: "assets/mascot-timeline.png",
-  kpi: "assets/mascot-kpi.png",
-  chart: "assets/mascot-chart.png",
-  thanks: "assets/mascot-thanks.png"
-};
-const mascotAlt = {
-  intro: "Mascot Tuấn khoanh tay tự tin giới thiệu bản thân",
-  about: "Mascot Tuấn mở tay chào hỏi",
-  timeline: "Mascot Tuấn chỉ vào timeline",
-  kpi: "Mascot Tuấn giơ hai tay ăn mừng KPI",
-  chart: "Mascot Tuấn chỉ vào biểu đồ tăng trưởng",
-  thanks: "Mascot Tuấn vẫy tay cảm ơn"
-};
-const multiChartColors = ["#287d78", "#b66f29", "#3f6f9f", "#7a8b4d", "#9a5f7b", "#5d6f75"];
-const experienceDetails = {
-  avakids: {
-    eyebrow: "09/2024 - 06/2026 · SEO Specialist",
-    title: "Chuỗi Mẹ & Bé AVAKids (MWG)",
-    html: `
-      <p>Xây dựng và triển khai chiến lược SEO tổng thể từ 6-12 tháng với mục tiêu tăng 21% Organic Sessions, cải thiện thứ hạng và doanh thu từ SEO cho 786 URL danh mục và sản phẩm.</p>
-      <h3>Kết quả chính</h3>
-      <ul>
-        <li>Hoàn thành gần 91% so với mục tiêu đề ra.</li>
-        <li>Tăng 83% Organic Sessions trong 5 tháng đầu.</li>
-        <li>Hơn 45% bộ từ khóa sản phẩm mục tiêu nằm trong Top 1-3 và 35% keywords Top 4-10.</li>
-      </ul>
-      <h3>Phạm vi công việc</h3>
-      <ul>
-        <li>Phối hợp với Ngành hàng, Content, PM, Design để tối ưu SEO, nội dung, doanh thu và trải nghiệm người dùng.</li>
-        <li>Research keywords, phân tích đối thủ, xây dựng guideline content, internal link, outline và tối ưu nội dung cho trang danh mục, sản phẩm bằng Ahrefs, Keyword Planner và Keywordtool.io.</li>
-        <li>Audit website định kỳ bằng Ahrefs, Screaming Frog, GSC và GA4 để phát hiện lỗi technical, ranking, traffic và đề xuất hướng xử lý.</li>
-        <li>Xây dựng Dashboard, Report bằng Looker Studio, GA4, GSC và Google Sheets để theo dõi sức khỏe website, hiệu suất SEO và tiến độ mục tiêu.</li>
-        <li>Kết hợp App Script, Google Sheets, Codex, n8n và AI tools để tạo workflow đo rank, viết content infobox và tối ưu content sản phẩm theo keyword và URL.</li>
-      </ul>
-    `
-  },
-  routine: {
-    eyebrow: "08/2022 - 06/2024 · SEO Executive",
-    title: "ROUTINE",
-    html: `
-      <p>Triển khai SEO cho website thương hiệu thời trang, tập trung tăng Organic Traffic, mở rộng bộ từ khóa sản phẩm và cải thiện hiệu quả chuyển đổi.</p>
-      <h3>Kết quả chính</h3>
-      <ul>
-        <li>Quản lý danh sách 53 URL sản phẩm, tăng từ 200 keywords lên khoảng 850 keywords sản phẩm.</li>
-        <li>27% bộ từ khóa sản phẩm mục tiêu nằm trong Top 1-3 và 22% keywords Top 4-10.</li>
-        <li>Tăng 117% Organic Traffic trong 6 tháng đầu.</li>
-        <li>Sau 1 năm tăng hơn 243% Organic Sessions và 250% Click.</li>
-      </ul>
-      <h3>Phạm vi công việc</h3>
-      <ul>
-        <li>Quản lý đội ngũ content full-time, intern và freelancer để lên kế hoạch, research, ý tưởng hằng tháng và tối ưu nội dung.</li>
-        <li>Tối ưu blog, sản phẩm, internal link và mô tả các nội dung technical để cải thiện SEO.</li>
-        <li>Phối hợp Design, IT và Developer để cải thiện SEO, layout website và tăng tỷ lệ chuyển đổi.</li>
-        <li>Audit, báo cáo hiệu suất SEO, theo dõi keyword ranking, traffic, competitor và đề xuất kế hoạch cải thiện định kỳ.</li>
-      </ul>
-    `
-  },
-  drcheck: {
-    eyebrow: "11/2020 - 06/2022 · SEO Executive",
-    title: "Dr. Check Clinic",
-    html: `
-      <p>Resume hiện chưa có mô tả chi tiết nhiệm vụ, KPI hoặc dự án nổi bật cho giai đoạn này.</p>
-      <ul>
-        <li>Có thể giữ ngắn để không làm loãng portfolio.</li>
-        <li>Nếu muốn làm mạnh hơn, nên bổ sung loại website, scope công việc, chỉ số traffic/ranking và công cụ đã dùng.</li>
-      </ul>
-    `
-  },
-  devi: {
-    eyebrow: "04/2020 - 11/2020 · Digital Marketing",
-    title: "DEVI Kids Import-Export Company",
-    html: `
-      <p>Resume hiện chưa có mô tả chi tiết kênh phụ trách, KPI hoặc dự án nổi bật cho giai đoạn Digital Marketing đầu tiên.</p>
-      <ul>
-        <li>Có thể giữ như một mốc khởi đầu nghề nghiệp.</li>
-        <li>Nếu bổ sung sau, nên thêm kênh triển khai, loại nội dung, ngân sách hoặc kết quả đo được.</li>
-      </ul>
-    `
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+  function updateScrollUI() {
+    const scrollTop = window.scrollY;
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+
+    header?.classList.toggle('is-scrolled', scrollTop > 18);
+    if (progress) progress.style.transform = `scaleX(${clamp(ratio, 0, 1)})`;
   }
-};
 
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        revealObserver.unobserve(entry.target);
-      }
+  let scrollFrame = 0;
+  window.addEventListener('scroll', () => {
+    if (scrollFrame) return;
+    scrollFrame = requestAnimationFrame(() => {
+      updateScrollUI();
+      scrollFrame = 0;
     });
-  },
-  { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
-);
+  }, { passive: true });
+  updateScrollUI();
 
-const counterObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        counterObserver.unobserve(entry.target);
-      }
+  if (navToggle && navLinks) {
+    const closeMenu = () => {
+      navLinks.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+    };
+
+    navToggle.addEventListener('click', () => {
+      const open = !navLinks.classList.contains('is-open');
+      navLinks.classList.toggle('is-open', open);
+      navToggle.setAttribute('aria-expanded', String(open));
+      document.body.classList.toggle('menu-open', open);
     });
-  },
-  { threshold: 0.18, rootMargin: "0px 0px -6% 0px" }
-);
-
-const chartObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-drawn");
-        chartObserver.unobserve(entry.target);
-      }
+    navLinks.addEventListener('click', (event) => {
+      if (event.target.closest('a')) closeMenu();
     });
-  },
-  { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
-);
-
-const guideObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) updateActiveGuide();
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeMenu();
     });
-  },
-  { threshold: 0.08, rootMargin: "-10% 0px -16% 0px" }
-);
-
-chartTooltip.className = "chart-tooltip";
-chartTooltip.setAttribute("aria-hidden", "true");
-document.body.appendChild(chartTooltip);
-
-reveals.forEach((element) => revealObserver.observe(element));
-counters.forEach((element) => counterObserver.observe(element));
-charts.forEach((chart) => {
-  drawChart(chart);
-  chartObserver.observe(chart);
-});
-multiLineCharts.forEach((chart) => {
-  drawMultiLineChart(chart);
-  chartObserver.observe(chart);
-});
-guideSections.forEach((section) => guideObserver.observe(section));
-setupMobileAccordions();
-setupExperienceMorph();
-setupEmailActions();
-setupExperienceModal();
-setupMultiChartTooltips();
-
-function updateProgress() {
-  const scrollTop = window.scrollY || document.documentElement.scrollTop;
-  const height = document.documentElement.scrollHeight - window.innerHeight;
-  const value = height > 0 ? (scrollTop / height) * 100 : 0;
-  progress.style.width = `${Math.min(value, 100)}%`;
-
-  if (mascot && !prefersReducedMotion) {
-    const float = Math.sin(scrollTop / 170) * 7;
-    const sway = Math.sin(scrollTop / 230) * 2.8;
-    mascot.style.setProperty("--guide-float", `${float}px`);
-    mascot.style.setProperty("--guide-sway", `${sway}deg`);
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 820) closeMenu();
+    });
   }
 
-  updateActiveGuide();
-  runViewportAnimations();
-}
-
-function updateHeroMorph(event) {
-  if (!heroVisual || window.matchMedia("(max-width: 980px)").matches) return;
-
-  const rect = heroVisual.getBoundingClientRect();
-  const x = (event.clientX - rect.left) / rect.width - 0.5;
-  const y = (event.clientY - rect.top) / rect.height - 0.5;
-
-  heroVisual.style.setProperty("--tilt-x", `${y * -8}deg`);
-  heroVisual.style.setProperty("--tilt-y", `${x * 10}deg`);
-}
-
-function animateCounter(element) {
-  if (element.dataset.animated === "true") return;
-  element.dataset.animated = "true";
-
-  const target = Number(element.dataset.count || 0);
-  const prefix = element.dataset.prefix || "";
-  const suffix = element.dataset.suffix || "";
-  const duration = prefersReducedMotion ? 1 : 1350;
-  const startTime = performance.now();
-
-  function setValue(value) {
-    element.textContent = `${prefix}${value}${suffix}`;
-  }
-
-  if (prefersReducedMotion) {
-    setValue(target);
-    return;
-  }
-
-  const timer = window.setInterval(() => {
-    const now = performance.now();
-    const progressValue = Math.min((now - startTime) / duration, 1);
-    const eased = 1 - Math.pow(1 - progressValue, 3);
-    const value = Math.round(target * eased);
-    setValue(value);
-
-    if (progressValue >= 1) {
-      setValue(target);
-      window.clearInterval(timer);
-    }
-  }, 16);
-}
-
-function activateGuide(section) {
-  if (!section || activeGuideSection === section || !mascot || !mascotMessage) return;
-
-  const index = [...guideSections].indexOf(section);
-  const side = getGuideSide(section, index);
-  const pose = section.dataset.pose || "intro";
-  activeGuideSection = section;
-  mascot.dataset.side = side;
-  mascot.dataset.section = section.id || "section";
-  mascot.dataset.pose = pose;
-  mascotMessage.textContent = section.dataset.guide;
-
-  if (mascotImage && mascotPoses[pose] && !mascotImage.src.endsWith(mascotPoses[pose])) {
-    mascot.classList.add("is-switching");
-    window.setTimeout(() => {
-      mascotImage.src = mascotPoses[pose];
-      mascotImage.alt = mascotAlt[pose] || "Mascot Tuấn 3D";
-      mascot.classList.remove("is-switching");
-    }, prefersReducedMotion ? 0 : 140);
-  }
-}
-
-function updateActiveGuide() {
-  if (!guideSections.length) return;
-  const targetLine = window.innerHeight * 0.6;
-  let active = guideSections[0];
-
-  guideSections.forEach((section) => {
-    const rect = section.getBoundingClientRect();
-    if (rect.top <= targetLine && rect.bottom > targetLine) {
-      active = section;
-    }
+  const revealItems = document.querySelectorAll('.reveal');
+  revealItems.forEach((item, index) => {
+    item.style.setProperty('--reveal-delay', `${Math.min(index % 5, 4) * 70}ms`);
   });
 
-  activateGuide(active);
-}
-
-function getGuideSide(section, index) {
-  if (section.id === "charts" || section.id === "workflow") return "left";
-  if (section.id === "timeline" || section.id === "certificates") return "right";
-  return index % 2 === 0 ? "right" : "left";
-}
-
-function isInViewport(element, offset = 0.88) {
-  const rect = element.getBoundingClientRect();
-  return rect.top < window.innerHeight * offset && rect.bottom > window.innerHeight * (1 - offset);
-}
-
-function runViewportAnimations() {
-  counters.forEach((counter) => {
-    if (counter.dataset.animated !== "true" && isInViewport(counter, 0.94)) animateCounter(counter);
-  });
-
-  charts.forEach((chart) => {
-    if (!chart.classList.contains("is-drawn") && isInViewport(chart, 0.92)) chart.classList.add("is-drawn");
-  });
-
-  multiLineCharts.forEach((chart) => {
-    if (!chart.classList.contains("is-drawn") && isInViewport(chart, 0.92)) chart.classList.add("is-drawn");
-  });
-}
-
-function drawChart(svg) {
-  const values = (svg.dataset.values || "")
-    .split(",")
-    .map((value) => Number(value.trim()))
-    .filter((value) => Number.isFinite(value));
-  if (values.length < 2) return;
-
-  const labels = (svg.dataset.labels || "")
-    .split(",")
-    .map((label) => label.trim())
-    .filter(Boolean);
-  const unit = svg.dataset.unit || "";
-  const [, , viewWidth, viewHeight] = (svg.getAttribute("viewBox") || "0 0 420 220").split(/\s+/).map(Number);
-  const width = viewWidth || 420;
-  const height = viewHeight || 220;
-  const isMobileChart = mobileMedia.matches;
-  const padding = isMobileChart ? 18 : 28;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const range = max - min || 1;
-  const step = (width - padding * 2) / (values.length - 1);
-  const pointData = values.map((value, index) => {
-    const x = padding + index * step;
-    const y = height - padding - ((value - min) / range) * (height - padding * 2);
-    return { x, y, value, label: labels[index] || `Point ${index + 1}` };
-  });
-  const points = pointData.map((point) => `${point.x},${point.y}`);
-  const gradientId = `chartGradient-${Math.random().toString(16).slice(2)}`;
-  const labelIndexes = isMobileChart
-    ? [0, pointData.length - 1]
-    : pointData.length > 12
-      ? [0, Math.floor(pointData.length / 2), pointData.length - 1]
-      : pointData.map((_, index) => index);
-  const valueInterval = isMobileChart ? Math.ceil(pointData.length / 4) : Math.ceil(pointData.length / 6);
-  const valueLabelIndexes = pointData
-    .map((_, index) => index)
-    .filter((index) => index === pointData.length - 1 || index % valueInterval === 0);
-
-  svg.innerHTML = `
-    <defs>
-      <linearGradient id="${gradientId}" x1="0" x2="1" y1="0" y2="0">
-        <stop offset="0%" stop-color="#287d78" />
-        <stop offset="100%" stop-color="#b66f29" />
-      </linearGradient>
-    </defs>
-    <g class="chart-grid-lines">
-      <line x1="${padding}" y1="${padding + 22}" x2="${width - padding}" y2="${padding + 22}"></line>
-      <line x1="${padding}" y1="${height / 2}" x2="${width - padding}" y2="${height / 2}"></line>
-      <line x1="${padding}" y1="${height - padding - 20}" x2="${width - padding}" y2="${height - padding - 20}"></line>
-    </g>
-    <polyline class="chart-area" points="${padding},${height - padding} ${points.join(" ")} ${width - padding},${height - padding}"></polyline>
-    <polyline class="chart-line" style="stroke:url(#${gradientId})" points="${points.join(" ")}"></polyline>
-    <g class="chart-dots">
-      ${points
-        .map((point, index) => (index % Math.ceil(points.length / 6) === 0 || index === points.length - 1 ? `<circle cx="${point.split(",")[0]}" cy="${point.split(",")[1]}" r="4"></circle>` : ""))
-        .join("")}
-    </g>
-    <g class="chart-labels">
-      ${labelIndexes.map((index) => `<text x="${pointData[index].x}" y="${height - 6}">${pointData[index].label}</text>`).join("")}
-    </g>
-    <g class="chart-value-labels">
-      ${valueLabelIndexes
-        .map((index) => {
-          const point = pointData[index];
-          const y = Math.max(point.y - 10, 18);
-          return `<text x="${Math.min(Math.max(point.x, padding + 8), width - padding - 8)}" y="${y}">${point.value}${unit}</text>`;
-        })
-        .join("")}
-    </g>
-  `;
-
-  const line = svg.querySelector(".chart-line");
-  if (line) {
-    const length = line.getTotalLength();
-    line.style.setProperty("--line-length", length);
-  }
-}
-
-function drawMultiLineChart(svg) {
-  const series = parseMultiLineSeries(svg.dataset.series || "");
-  if (!series.length) return;
-
-  const labels = (svg.dataset.labels || "")
-    .split(",")
-    .map((label) => label.trim())
-    .filter(Boolean);
-  const [, , viewWidth, viewHeight] = (svg.getAttribute("viewBox") || "0 0 760 320").split(/\s+/).map(Number);
-  const width = viewWidth || 760;
-  const height = viewHeight || 320;
-  const isMobileChart = mobileMedia.matches;
-  const padding = isMobileChart ? 24 : 38;
-  const chartTop = padding + 6;
-  const chartBottom = height - padding - 22;
-  const chartLeft = padding;
-  const chartRight = width - padding;
-  const allValues = series.flatMap((item) => item.values);
-  const max = Math.max(...allValues);
-  const min = Math.min(...allValues);
-  const range = max - min || 1;
-  const maxLength = Math.max(...series.map((item) => item.values.length));
-  const step = (chartRight - chartLeft) / Math.max(maxLength - 1, 1);
-  const labelIndexes = isMobileChart ? [0, maxLength - 1] : [0, Math.floor(maxLength / 2), maxLength - 1];
-  const pointsBySeries = [];
-
-  const lineMarkup = series
-    .map((item, seriesIndex) => {
-      const color = multiChartColors[seriesIndex % multiChartColors.length];
-      const points = item.values.map((value, valueIndex) => {
-        const x = chartLeft + valueIndex * step;
-        const y = chartBottom - ((value - min) / range) * (chartBottom - chartTop);
-        return { x, y, value };
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealItems.forEach((item) => item.classList.add('is-visible'));
+  } else {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
       });
-      pointsBySeries.push(points);
-      const pointString = points.map((point) => `${point.x},${point.y}`).join(" ");
-      const last = points[points.length - 1];
-      const labelX = Math.min(last.x + 8, chartRight - 52);
-      const labelY = Math.min(Math.max(last.y + 4, chartTop + 10), chartBottom - 4);
-      const dots = points
-        .map((point, index) => {
-          const interval = isMobileChart ? Math.ceil(points.length / 4) : Math.ceil(points.length / 7);
-          return index % interval === 0 || index === points.length - 1
-            ? `<circle cx="${point.x}" cy="${point.y}" r="${isMobileChart ? 2.8 : 3.5}" style="fill:${color}"></circle>`
-            : "";
-        })
-        .join("");
+    }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+    revealItems.forEach((item) => revealObserver.observe(item));
+  }
 
-      return `
-        <g class="multi-chart-series">
-          <polyline class="multi-chart-line" style="stroke:${color}" points="${pointString}"></polyline>
-          <g class="multi-chart-dots">${dots}</g>
-          <text class="multi-chart-end-label" x="${labelX}" y="${labelY}" style="fill:${color}">${item.name}</text>
-        </g>`;
-    })
-    .join("");
+  const allSectionLinks = document.querySelectorAll('.nav-links a, .hero-agenda a');
+  const sections = sectionIds
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
 
-  svg.innerHTML = `
-    <g class="chart-grid-lines">
-      <line x1="${chartLeft}" y1="${chartTop}" x2="${chartRight}" y2="${chartTop}"></line>
-      <line x1="${chartLeft}" y1="${(chartTop + chartBottom) / 2}" x2="${chartRight}" y2="${(chartTop + chartBottom) / 2}"></line>
-      <line x1="${chartLeft}" y1="${chartBottom}" x2="${chartRight}" y2="${chartBottom}"></line>
-    </g>
-    ${lineMarkup}
-    <g class="chart-labels">
-      ${labelIndexes
-        .map((index) => `<text x="${chartLeft + index * step}" y="${height - 8}">${labels[index] || ""}</text>`)
-        .join("")}
-    </g>
-    <g class="multi-hover-layer">
-      <line class="multi-hover-line" x1="${chartLeft}" y1="${chartTop}" x2="${chartLeft}" y2="${chartBottom}"></line>
-      ${series
-        .map((item, index) => `<circle class="multi-hover-dot" r="5" style="stroke:${multiChartColors[index % multiChartColors.length]}"></circle>`)
-        .join("")}
-    </g>
-  `;
-
-  svg._multiChartData = {
-    labels,
-    series,
-    pointsBySeries,
-    chartLeft,
-    chartRight,
-    chartTop,
-    chartBottom,
-    step,
-    width,
-    height
+  const setActiveSection = (id) => {
+    allSectionLinks.forEach((link) => {
+      link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
+    });
   };
 
-  svg.querySelectorAll(".multi-chart-line").forEach((line) => {
-    const length = line.getTotalLength();
-    line.style.setProperty("--line-length", length);
-  });
-}
+  let navSectionFrame = 0;
+  const updateActiveNavSection = () => {
+    const marker = window.scrollY + window.innerHeight * 0.32;
+    let activeId = sections[0]?.id;
+    sections.forEach((section) => {
+      if (marker >= section.offsetTop) activeId = section.id;
+    });
+    if (activeId) setActiveSection(activeId);
+  };
+  window.addEventListener('scroll', () => {
+    if (navSectionFrame) return;
+    navSectionFrame = requestAnimationFrame(() => {
+      updateActiveNavSection();
+      navSectionFrame = 0;
+    });
+  }, { passive: true });
+  window.addEventListener('resize', updateActiveNavSection);
+  updateActiveNavSection();
 
-function parseMultiLineSeries(value) {
-  return value
-    .split(";")
-    .map((entry) => {
-      const [name, rawValues] = entry.split(":");
-      const values = (rawValues || "")
-        .split(",")
-        .map((item) => Number(item.trim()))
-        .filter((item) => Number.isFinite(item));
-      return { name: (name || "").trim(), values };
-    })
-    .filter((item) => item.name && item.values.length > 1);
-}
-
-function setupMobileAccordions() {
-  mobileAccordionItems.forEach((item) => {
-    item.classList.add("is-mobile-accordion");
-    item.setAttribute("role", "button");
-    item.setAttribute("tabindex", "0");
-    item.setAttribute("aria-expanded", "false");
-
-    item.addEventListener("click", () => toggleMobileAccordion(item));
-    item.addEventListener("keydown", (event) => {
-      if (event.key !== "Enter" && event.key !== " ") return;
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const id = link.getAttribute('href');
+      if (!id || id === '#') return;
+      const target = document.querySelector(id);
+      if (!target) return;
       event.preventDefault();
-      toggleMobileAccordion(item);
+      target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      history.replaceState(null, '', id);
     });
   });
-}
 
-function setupExperienceMorph() {
-  experienceTabs.forEach((tab) => {
-    tab.addEventListener("click", () => activateExperience(tab.dataset.experience));
-    tab.addEventListener("keydown", (event) => {
-      if (event.key !== "Enter" && event.key !== " ") return;
-      event.preventDefault();
-      activateExperience(tab.dataset.experience);
+  const tabs = [...document.querySelectorAll('[role="tab"]')];
+  const panels = [...document.querySelectorAll('.experience-panel[data-panel]')];
+
+  function activateTab(tab) {
+    const panelIndex = tab.dataset.tab;
+    tabs.forEach((item) => {
+      const active = item === tab;
+      item.classList.toggle('is-active', active);
+      item.setAttribute('aria-selected', String(active));
+      item.tabIndex = active ? 0 : -1;
     });
-  });
-}
-
-function activateExperience(index) {
-  experienceTabs.forEach((tab) => {
-    const isActive = tab.dataset.experience === index;
-    tab.classList.toggle("is-active", isActive);
-    tab.setAttribute("aria-selected", String(isActive));
-  });
-
-  experiencePanels.forEach((panel) => {
-    panel.classList.toggle("is-active", panel.dataset.experiencePanel === index);
-  });
-}
-
-function toggleMobileAccordion(item) {
-  if (!mobileMedia.matches) return;
-
-  const isOpen = item.classList.contains("is-open");
-  const group = item.closest("#workflow") || item.closest(".credentials-band");
-
-  group?.querySelectorAll(".is-mobile-accordion.is-open").forEach((openItem) => {
-    if (openItem === item) return;
-    openItem.classList.remove("is-open");
-    openItem.setAttribute("aria-expanded", "false");
-  });
-
-  item.classList.toggle("is-open", !isOpen);
-  item.setAttribute("aria-expanded", String(!isOpen));
-}
-
-function setupEmailActions() {
-  emailActions.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      const user = link.dataset.emailUser || "";
-      const domain = link.dataset.emailDomain || "";
-      const tld = link.dataset.emailTld || "";
-      if (!user || !domain || !tld) return;
-      window.location.href = `mailto:${user}@${domain}.${tld}`;
+    panels.forEach((panel) => {
+      const active = panel.dataset.panel === panelIndex;
+      panel.classList.toggle('is-active', active);
+      panel.hidden = !active;
     });
-  });
-}
-
-function setupExperienceModal() {
-  detailButtons.forEach((button) => {
-    button.addEventListener("click", () => openExperienceModal(button.dataset.modal));
-  });
-
-  modalCloseButtons.forEach((button) => {
-    button.addEventListener("click", closeExperienceModal);
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeExperienceModal();
-  });
-}
-
-function openExperienceModal(key) {
-  const detail = experienceDetails[key];
-  if (!detail || !experienceModal || !modalTitle || !modalBody || !modalEyebrow) return;
-
-  modalEyebrow.textContent = detail.eyebrow;
-  modalTitle.textContent = detail.title;
-  modalBody.innerHTML = detail.html;
-  experienceModal.classList.add("is-open");
-  experienceModal.setAttribute("aria-hidden", "false");
-  document.body.classList.add("modal-open");
-}
-
-function closeExperienceModal() {
-  if (!experienceModal) return;
-
-  experienceModal.classList.remove("is-open");
-  experienceModal.setAttribute("aria-hidden", "true");
-  document.body.classList.remove("modal-open");
-}
-
-function setupMultiChartTooltips() {
-  multiLineCharts.forEach((svg) => {
-    svg.addEventListener("pointermove", (event) => updateMultiChartTooltip(svg, event));
-    svg.addEventListener("pointerleave", () => hideMultiChartTooltip(svg));
-    svg.addEventListener("pointerdown", (event) => updateMultiChartTooltip(svg, event));
-  });
-}
-
-function updateMultiChartTooltip(svg, event) {
-  const data = svg._multiChartData;
-  if (!data || !data.labels.length || !chartTooltip) return;
-
-  const rect = svg.getBoundingClientRect();
-  const xRatio = (event.clientX - rect.left) / rect.width;
-  const chartX = xRatio * data.width;
-  const index = Math.min(
-    data.labels.length - 1,
-    Math.max(0, Math.round((chartX - data.chartLeft) / data.step))
-  );
-  const x = data.chartLeft + index * data.step;
-  const yValues = data.pointsBySeries.map((points) => points[index]?.y || data.chartBottom);
-  const hoverLine = svg.querySelector(".multi-hover-line");
-  const hoverDots = svg.querySelectorAll(".multi-hover-dot");
-
-  if (hoverLine) {
-    hoverLine.setAttribute("x1", x);
-    hoverLine.setAttribute("x2", x);
   }
 
-  hoverDots.forEach((dot, dotIndex) => {
-    const point = data.pointsBySeries[dotIndex]?.[index];
-    if (!point) return;
-    dot.setAttribute("cx", point.x);
-    dot.setAttribute("cy", point.y);
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => activateTab(tab));
+    tab.addEventListener('keydown', (event) => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      let nextIndex = index;
+      if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+      if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+      if (event.key === 'Home') nextIndex = 0;
+      if (event.key === 'End') nextIndex = tabs.length - 1;
+      activateTab(tabs[nextIndex]);
+      tabs[nextIndex].focus();
+    });
   });
 
-  chartTooltip.innerHTML = `
-    <strong>${data.labels[index]}</strong>
-    ${data.series
-      .map((item, seriesIndex) => {
-        const color = multiChartColors[seriesIndex % multiChartColors.length];
-        const value = item.values[index] || 0;
-        return `<span><span><i style="background:${color}"></i>${item.name}</span><b>${formatNumber(value)}</b></span>`;
+  const emailAction = document.querySelector('[data-email-user][data-email-domain]');
+  if (emailAction) {
+    const tld = emailAction.dataset.emailTld ? `.${emailAction.dataset.emailTld}` : '';
+    const email = `${emailAction.dataset.emailUser}@${emailAction.dataset.emailDomain}${tld}`;
+    emailAction.href = `mailto:${email}`;
+    emailAction.setAttribute('aria-label', `Gửi email đến ${email}`);
+  }
+
+  function animateCounter(element) {
+    if (element.dataset.counted === 'true') return;
+    element.dataset.counted = 'true';
+    const target = Number(element.dataset.value || 0);
+    const prefix = element.dataset.prefix || '';
+    const suffix = element.dataset.suffix || '';
+    const duration = 3000;
+    const formatter = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 0 });
+
+    if (reduceMotion) {
+      element.textContent = `${prefix}${formatter.format(target)}${suffix}`;
+      return;
+    }
+
+    const start = performance.now();
+    const tick = (now) => {
+      const progressValue = clamp((now - start) / duration, 0, 1);
+      const eased = 1 - Math.pow(1 - progressValue, 4);
+      const value = Math.round(target * eased);
+      element.textContent = `${prefix}${formatter.format(value)}${suffix}`;
+      if (progressValue < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  const counters = document.querySelectorAll('[data-counter]');
+  if ('IntersectionObserver' in window) {
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        animateCounter(entry.target);
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.45 });
+    counters.forEach((counter) => counterObserver.observe(counter));
+  } else {
+    counters.forEach(animateCounter);
+  }
+
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const makeSvg = (name, attributes = {}) => {
+    const node = document.createElementNS(svgNS, name);
+    Object.entries(attributes).forEach(([key, value]) => node.setAttribute(key, value));
+    return node;
+  };
+
+  const chartTooltip = document.createElement('div');
+  chartTooltip.className = 'chart-tooltip';
+  chartTooltip.setAttribute('aria-hidden', 'true');
+  document.body.append(chartTooltip);
+
+  const multiChartColors = ['#d1ffca', '#8ad7ff', '#ffd166', '#ff8c78', '#c6a7ff', '#f5f5f5'];
+  const formatNumber = (value) => new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 2 }).format(value);
+
+  function buildChart(svg) {
+    const rawValues = (svg.dataset.values || '').split(',').map(Number).filter(Number.isFinite);
+    const labels = (svg.dataset.labels || '').split(',').map((label) => label.trim());
+    if (rawValues.length < 2) return;
+
+    const width = 760;
+    const height = 320;
+    const padding = { top: 28, right: 25, bottom: 46, left: 52 };
+    const innerWidth = width - padding.left - padding.right;
+    const innerHeight = height - padding.top - padding.bottom;
+    const minValue = Math.min(...rawValues);
+    const maxValue = Math.max(...rawValues);
+    const range = Math.max(maxValue - minValue, 1);
+    const baseline = Math.max(0, minValue - range * 0.16);
+    const ceiling = maxValue + range * 0.12;
+    const valueRange = ceiling - baseline;
+
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    svg.setAttribute('role', 'img');
+    if (!svg.hasAttribute('aria-label')) svg.setAttribute('aria-label', 'Biểu đồ tăng trưởng SEO');
+    svg.replaceChildren();
+
+    for (let index = 0; index <= 4; index += 1) {
+      const y = padding.top + (innerHeight / 4) * index;
+      svg.append(makeSvg('line', {
+        x1: padding.left,
+        y1: y,
+        x2: width - padding.right,
+        y2: y,
+        class: 'chart-grid-line'
+      }));
+    }
+
+    const points = rawValues.map((value, index) => {
+      const x = padding.left + (innerWidth * index) / (rawValues.length - 1);
+      const y = padding.top + innerHeight - ((value - baseline) / valueRange) * innerHeight;
+      return { x, y, value, label: labels[index] || `Mốc ${index + 1}` };
+    });
+
+    const pathData = points
+      .map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x.toFixed(2)} ${point.y.toFixed(2)}`)
+      .join(' ');
+    const path = makeSvg('path', { d: pathData, class: 'chart-path' });
+    svg.append(path);
+
+    points.forEach((point, index) => {
+      const dot = makeSvg('circle', {
+        cx: point.x,
+        cy: point.y,
+        r: 5,
+        class: 'chart-dot'
+      });
+      dot.style.setProperty('--dot-delay', `${300 + index * 70}ms`);
+      svg.append(dot);
+
+      if (index === 0 || index === points.length - 1) {
+        const valueText = makeSvg('text', {
+          x: point.x,
+          y: point.y - 14,
+          class: 'chart-value',
+          'text-anchor': index === 0 ? 'start' : 'end'
+        });
+        valueText.textContent = `${point.value}%`;
+        svg.append(valueText);
+      }
+
+      if (labels[index] && (index % 2 === 0 || index === labels.length - 1)) {
+        const label = makeSvg('text', {
+          x: point.x,
+          y: height - 17,
+          class: 'chart-label',
+          'text-anchor': 'middle'
+        });
+        label.textContent = labels[index];
+        svg.append(label);
+      }
+    });
+
+    svg.append(makeSvg('line', {
+      x1: padding.left,
+      y1: padding.top,
+      x2: padding.left,
+      y2: height - padding.bottom,
+      class: 'chart-hover-line'
+    }));
+    svg.append(makeSvg('circle', { r: 6, class: 'chart-hover-dot' }));
+
+    const length = path.getTotalLength();
+    path.style.strokeDasharray = `${length}`;
+    path.style.strokeDashoffset = reduceMotion ? '0' : `${length}`;
+    svg._chartData = {
+      points,
+      width,
+      height,
+      padding,
+      seriesName: svg.dataset.seriesName || 'Giá trị',
+      unit: svg.dataset.unit || ''
+    };
+    svg.dataset.ready = 'true';
+  }
+
+  function parseMultiSeries(value) {
+    return value
+      .split(';')
+      .map((item) => {
+        const separator = item.indexOf(':');
+        if (separator < 0) return null;
+        const name = item.slice(0, separator).trim();
+        const values = item.slice(separator + 1).split(',').map(Number).filter(Number.isFinite);
+        return name && values.length ? { name, values } : null;
       })
-      .join("")}
-  `;
+      .filter(Boolean);
+  }
 
-  const y = Math.min(...yValues);
-  const pageX = rect.left + (x / data.width) * rect.width;
-  const pageY = rect.top + (y / data.height) * rect.height;
-  chartTooltip.style.left = `${Math.min(Math.max(pageX, 140), window.innerWidth - 140)}px`;
-  chartTooltip.style.top = `${Math.max(pageY, 120)}px`;
-  chartTooltip.classList.add("is-visible");
-  svg.classList.add("is-hovering");
-}
+  function buildMultiChart(svg) {
+    const series = parseMultiSeries(svg.dataset.series || '');
+    const labels = (svg.dataset.labels || '').split(',').map((label) => label.trim());
+    if (!series.length) return;
 
-function hideMultiChartTooltip(svg) {
-  svg.classList.remove("is-hovering");
-  chartTooltip.classList.remove("is-visible");
-}
+    const width = 900;
+    const height = 360;
+    const padding = { top: 30, right: 34, bottom: 48, left: 48 };
+    const chartRight = width - padding.right;
+    const chartBottom = height - padding.bottom;
+    const allValues = series.flatMap((item) => item.values);
+    const minValue = Math.min(...allValues);
+    const maxValue = Math.max(...allValues);
+    const range = Math.max(maxValue - minValue, 1);
+    const baseline = Math.max(0, minValue - range * 0.08);
+    const ceiling = maxValue + range * 0.08;
+    const valueRange = ceiling - baseline;
+    const maxLength = Math.max(...series.map((item) => item.values.length));
+    const step = (chartRight - padding.left) / Math.max(maxLength - 1, 1);
+    const pointsBySeries = [];
 
-function formatNumber(value) {
-  return new Intl.NumberFormat("vi-VN").format(value);
-}
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    svg.replaceChildren();
 
-function resizeCanvas() {
-  if (!canvas || !ctx) return;
-  const ratio = Math.min(window.devicePixelRatio || 1, 2);
-  canvasWidth = window.innerWidth;
-  canvasHeight = Math.min(window.innerHeight * 1.18, 900);
-  canvas.width = canvasWidth * ratio;
-  canvas.height = canvasHeight * ratio;
-  canvas.style.width = `${canvasWidth}px`;
-  canvas.style.height = `${canvasHeight}px`;
-  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    for (let index = 0; index <= 4; index += 1) {
+      const y = padding.top + ((chartBottom - padding.top) / 4) * index;
+      svg.append(makeSvg('line', {
+        x1: padding.left,
+        y1: y,
+        x2: chartRight,
+        y2: y,
+        class: 'chart-grid-line'
+      }));
+    }
 
-  const labels = ["AI", "SEO", "GA4", "GSC", "Content", "Design", "n8n", "Data"];
-  particles = Array.from({ length: window.innerWidth < 700 ? 18 : 30 }, (_, index) => ({
-    x: Math.random() * canvasWidth,
-    y: Math.random() * canvasHeight,
-    vx: (Math.random() - 0.5) * 0.22,
-    vy: (Math.random() - 0.5) * 0.18,
-    size: Math.random() * 22 + 18,
-    label: labels[index % labels.length],
-    alpha: Math.random() * 0.18 + 0.08
-  }));
-}
+    series.forEach((item, seriesIndex) => {
+      const color = multiChartColors[seriesIndex % multiChartColors.length];
+      const points = item.values.map((value, index) => ({
+        x: padding.left + index * step,
+        y: padding.top + (chartBottom - padding.top) - ((value - baseline) / valueRange) * (chartBottom - padding.top),
+        value
+      }));
+      pointsBySeries.push(points);
 
-function animateCanvas() {
-  if (!canvas || !ctx) return;
-  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      const group = makeSvg('g', { class: 'multi-chart-series', 'data-series-index': seriesIndex });
+      const pathData = points
+        .map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x.toFixed(2)} ${point.y.toFixed(2)}`)
+        .join(' ');
+      const path = makeSvg('path', { d: pathData, class: 'multi-chart-path', stroke: color });
+      group.append(path);
 
-  particles.forEach((particle) => {
-    particle.x += particle.vx;
-    particle.y += particle.vy;
+      points.forEach((point, index) => {
+        if (index % 4 !== 0 && index !== points.length - 1) return;
+        const dot = makeSvg('circle', {
+          cx: point.x,
+          cy: point.y,
+          r: 3.8,
+          class: 'multi-chart-dot',
+          fill: color
+        });
+        dot.style.setProperty('--dot-delay', `${300 + index * 35}ms`);
+        group.append(dot);
+      });
+      svg.append(group);
+    });
 
-    if (particle.x < -80) particle.x = canvasWidth + 80;
-    if (particle.x > canvasWidth + 80) particle.x = -80;
-    if (particle.y < -80) particle.y = canvasHeight + 80;
-    if (particle.y > canvasHeight + 80) particle.y = -80;
+    [0, Math.floor((maxLength - 1) / 2), maxLength - 1].forEach((index) => {
+      if (!labels[index]) return;
+      const label = makeSvg('text', {
+        x: padding.left + index * step,
+        y: height - 16,
+        class: 'chart-label',
+        'text-anchor': 'middle'
+      });
+      label.textContent = labels[index];
+      svg.append(label);
+    });
 
-    ctx.beginPath();
-    ctx.roundRect(particle.x, particle.y, particle.size * 2.8, particle.size, 12);
-    ctx.fillStyle = `rgba(255, 255, 255, ${particle.alpha})`;
-    ctx.fill();
-    ctx.strokeStyle = `rgba(40, 125, 120, ${particle.alpha + 0.05})`;
-    ctx.stroke();
-    ctx.fillStyle = `rgba(25, 25, 23, ${particle.alpha + 0.15})`;
-    ctx.font = "700 12px Inter, Arial, sans-serif";
-    ctx.fillText(particle.label, particle.x + 12, particle.y + particle.size / 2 + 4);
+    svg.append(makeSvg('line', {
+      x1: padding.left,
+      y1: padding.top,
+      x2: padding.left,
+      y2: chartBottom,
+      class: 'multi-hover-line'
+    }));
+    series.forEach((_, index) => {
+      svg.append(makeSvg('circle', {
+        r: 5.5,
+        class: 'multi-hover-dot',
+        stroke: multiChartColors[index % multiChartColors.length]
+      }));
+    });
+
+    svg.querySelectorAll('.multi-chart-path').forEach((path) => {
+      const length = path.getTotalLength();
+      path.style.strokeDasharray = `${length}`;
+      path.style.strokeDashoffset = reduceMotion ? '0' : `${length}`;
+    });
+
+    svg._multiChartData = {
+      labels,
+      series,
+      pointsBySeries,
+      width,
+      height,
+      chartLeft: padding.left,
+      chartRight,
+      chartTop: padding.top,
+      chartBottom,
+      step
+    };
+    svg.dataset.ready = 'true';
+  }
+
+  const charts = document.querySelectorAll('.line-chart, .multi-line-chart');
+  charts.forEach((chart) => {
+    if (chart.classList.contains('multi-line-chart')) buildMultiChart(chart);
+    else buildChart(chart);
   });
 
-  if (!prefersReducedMotion) requestAnimationFrame(animateCanvas);
-}
+  const drawChart = (svg) => {
+    if (svg.dataset.drawn === 'true') return;
+    svg.dataset.drawn = 'true';
+    svg.classList.add('is-drawn');
+    const paths = svg.querySelectorAll('.chart-path, .multi-chart-path');
+    if (!paths.length) return;
+    if (reduceMotion) {
+      paths.forEach((path) => { path.style.strokeDashoffset = '0'; });
+      return;
+    }
+    requestAnimationFrame(() => {
+      paths.forEach((path, index) => {
+        path.style.transition = `stroke-dashoffset 1.8s cubic-bezier(.22,.8,.3,1) ${index * 70}ms`;
+        path.style.strokeDashoffset = '0';
+      });
+    });
+  };
 
-window.addEventListener("scroll", updateProgress, { passive: true });
-window.addEventListener("resize", () => {
-  updateProgress();
-  resizeCanvas();
-  charts.forEach((chart) => drawChart(chart));
-  multiLineCharts.forEach((chart) => drawMultiLineChart(chart));
-  runViewportAnimations();
-});
-document.addEventListener("pointermove", updateHeroMorph, { passive: true });
+  function positionTooltip(clientX, clientY) {
+    chartTooltip.classList.add('is-visible');
+    chartTooltip.setAttribute('aria-hidden', 'false');
+    const halfWidth = Math.min(chartTooltip.offsetWidth / 2, 145);
+    const tooltipHeight = chartTooltip.offsetHeight;
+    const placeBelow = clientY < tooltipHeight + 96;
+    chartTooltip.classList.toggle('is-below', placeBelow);
+    chartTooltip.style.left = `${clamp(clientX, halfWidth + 14, window.innerWidth - halfWidth - 14)}px`;
+    chartTooltip.style.top = `${clamp(clientY, 88, window.innerHeight - 20)}px`;
+  }
 
-updateProgress();
-resizeCanvas();
-animateCanvas();
-updateActiveGuide();
-runViewportAnimations();
-window.setInterval(() => {
-  updateActiveGuide();
-  runViewportAnimations();
-}, 250);
+  function hideChartTooltip(svg) {
+    svg.classList.remove('is-hovering');
+    svg.querySelectorAll('.multi-chart-series').forEach((group) => group.classList.remove('is-focus'));
+    chartTooltip.classList.remove('is-visible');
+    chartTooltip.setAttribute('aria-hidden', 'true');
+  }
+
+  function updateLineTooltip(svg, event) {
+    const data = svg._chartData;
+    if (!data?.points?.length) return;
+    const rect = svg.getBoundingClientRect();
+    const chartX = ((event.clientX - rect.left) / rect.width) * data.width;
+    const step = data.points.length > 1 ? data.points[1].x - data.points[0].x : 1;
+    const index = clamp(Math.round((chartX - data.padding.left) / step), 0, data.points.length - 1);
+    const point = data.points[index];
+    const hoverLine = svg.querySelector('.chart-hover-line');
+    const hoverDot = svg.querySelector('.chart-hover-dot');
+    hoverLine?.setAttribute('x1', point.x);
+    hoverLine?.setAttribute('x2', point.x);
+    hoverDot?.setAttribute('cx', point.x);
+    hoverDot?.setAttribute('cy', point.y);
+    chartTooltip.innerHTML = `<strong>${point.label}</strong><span><span><i style="background:#d1ffca"></i>${data.seriesName}</span><b>${formatNumber(point.value)}${data.unit}</b></span>`;
+    svg.classList.add('is-hovering');
+    positionTooltip(rect.left + (point.x / data.width) * rect.width, rect.top + (point.y / data.height) * rect.height);
+  }
+
+  function updateMultiTooltip(svg, event) {
+    const data = svg._multiChartData;
+    if (!data?.labels?.length) return;
+    const rect = svg.getBoundingClientRect();
+    const chartX = ((event.clientX - rect.left) / rect.width) * data.width;
+    const index = clamp(Math.round((chartX - data.chartLeft) / data.step), 0, data.labels.length - 1);
+    const x = data.chartLeft + index * data.step;
+    const chartY = ((event.clientY - rect.top) / rect.height) * data.height;
+    const yValues = data.pointsBySeries.map((points) => points[index]?.y ?? data.chartBottom);
+    const focusIndex = yValues.reduce((closest, y, seriesIndex) =>
+      Math.abs(y - chartY) < Math.abs(yValues[closest] - chartY) ? seriesIndex : closest, 0);
+
+    const hoverLine = svg.querySelector('.multi-hover-line');
+    hoverLine?.setAttribute('x1', x);
+    hoverLine?.setAttribute('x2', x);
+    svg.querySelectorAll('.multi-hover-dot').forEach((dot, seriesIndex) => {
+      const point = data.pointsBySeries[seriesIndex]?.[index];
+      if (!point) return;
+      dot.setAttribute('cx', point.x);
+      dot.setAttribute('cy', point.y);
+    });
+    svg.querySelectorAll('.multi-chart-series').forEach((group, seriesIndex) => {
+      group.classList.toggle('is-focus', seriesIndex === focusIndex);
+    });
+    chartTooltip.innerHTML = `<strong>${data.labels[index]}</strong>${data.series.map((item, seriesIndex) =>
+      `<span><span><i style="background:${multiChartColors[seriesIndex % multiChartColors.length]}"></i>${item.name}</span><b>${formatNumber(item.values[index] || 0)}</b></span>`).join('')}`;
+    svg.classList.add('is-hovering');
+    positionTooltip(rect.left + (x / data.width) * rect.width, rect.top + (Math.min(...yValues) / data.height) * rect.height);
+  }
+
+  charts.forEach((svg) => {
+    const update = (event) => svg.classList.contains('multi-line-chart')
+      ? updateMultiTooltip(svg, event)
+      : updateLineTooltip(svg, event);
+    svg.addEventListener('pointermove', update);
+    svg.addEventListener('pointerdown', update);
+    svg.addEventListener('pointerleave', () => hideChartTooltip(svg));
+    svg.addEventListener('pointercancel', () => hideChartTooltip(svg));
+  });
+  window.addEventListener('scroll', () => {
+    chartTooltip.classList.remove('is-visible');
+    chartTooltip.setAttribute('aria-hidden', 'true');
+  }, { passive: true });
+
+  if ('IntersectionObserver' in window) {
+    const chartObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        drawChart(entry.target);
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.35 });
+    charts.forEach((chart) => chartObserver.observe(chart));
+  } else {
+    charts.forEach(drawChart);
+  }
+
+  const workflow = document.querySelector('.workflow');
+  if (workflow) {
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      workflow.classList.add('is-active');
+    } else {
+      const workflowObserver = new IntersectionObserver((entries, observer) => {
+        if (!entries[0].isIntersecting) return;
+        workflow.classList.add('is-active');
+        observer.disconnect();
+      }, { threshold: 0.28 });
+      workflowObserver.observe(workflow);
+    }
+
+    const steps = [...workflow.querySelectorAll('.workflow-step')];
+    let activeStep = 0;
+    let stepTimer = 0;
+    let workflowInView = false;
+    let workflowPaused = false;
+
+    const setActiveStep = (index) => {
+      activeStep = (index + steps.length) % steps.length;
+      steps.forEach((step, stepIndex) => {
+        const active = stepIndex === activeStep;
+        step.classList.toggle('is-current', active);
+        step.setAttribute('aria-current', active ? 'step' : 'false');
+      });
+    };
+
+    const scheduleStep = () => {
+      window.clearTimeout(stepTimer);
+      if (reduceMotion || !workflowInView || workflowPaused) return;
+      stepTimer = window.setTimeout(() => {
+        setActiveStep(activeStep + 1);
+        scheduleStep();
+      }, 3000);
+    };
+
+    steps.forEach((step, index) => {
+      step.tabIndex = 0;
+      step.addEventListener('click', () => {
+        setActiveStep(index);
+        scheduleStep();
+      });
+      step.addEventListener('focus', () => {
+        workflowPaused = true;
+        setActiveStep(index);
+        window.clearTimeout(stepTimer);
+      });
+      step.addEventListener('blur', () => {
+        workflowPaused = false;
+        scheduleStep();
+      });
+    });
+
+    workflow.addEventListener('pointerenter', () => {
+      workflowPaused = true;
+      window.clearTimeout(stepTimer);
+    });
+    workflow.addEventListener('pointerleave', () => {
+      workflowPaused = false;
+      scheduleStep();
+    });
+
+    if ('IntersectionObserver' in window) {
+      const autoStepObserver = new IntersectionObserver((entries) => {
+        workflowInView = entries[0].isIntersecting;
+        scheduleStep();
+      }, { threshold: 0.32 });
+      autoStepObserver.observe(workflow);
+    } else {
+      workflowInView = true;
+    }
+
+    setActiveStep(0);
+    scheduleStep();
+  }
+
+  const workflowGalleries = document.querySelectorAll('[data-gallery]');
+  workflowGalleries.forEach((gallery) => {
+    const mainImage = gallery.querySelector('.workflow-main-image');
+    const captionStep = gallery.querySelector('.workflow-caption-step');
+    const captionTitle = gallery.querySelector('.workflow-caption strong');
+    const captionText = gallery.querySelector('.workflow-caption p');
+    const count = gallery.querySelector('[data-gallery-count]');
+    const previous = gallery.querySelector('[data-gallery-prev]');
+    const next = gallery.querySelector('[data-gallery-next]');
+    const thumbnailStrip = gallery.querySelector('.workflow-thumbnails');
+    const thumbnails = [...gallery.querySelectorAll('.workflow-thumbnail')];
+    let currentIndex = 0;
+
+    if (!mainImage || !thumbnails.length) return;
+
+    const padStep = (value) => String(value).padStart(2, '0');
+
+    const updateGallery = (nextIndex, moveFocus = false) => {
+      currentIndex = (nextIndex + thumbnails.length) % thumbnails.length;
+      const selected = thumbnails[currentIndex];
+      const total = padStep(thumbnails.length);
+      const current = padStep(currentIndex + 1);
+
+      mainImage.classList.add('is-changing');
+      mainImage.alt = selected.dataset.alt || '';
+      mainImage.src = selected.dataset.src || mainImage.src;
+
+      const finishTransition = () => requestAnimationFrame(() => mainImage.classList.remove('is-changing'));
+      if (mainImage.complete) finishTransition();
+      else mainImage.addEventListener('load', finishTransition, { once: true });
+
+      if (captionStep) captionStep.textContent = `BƯỚC ${current} / ${total}`;
+      if (captionTitle) captionTitle.textContent = selected.dataset.label || '';
+      if (captionText) captionText.textContent = selected.dataset.caption || '';
+      if (count) count.textContent = `${current} / ${total}`;
+
+      thumbnails.forEach((thumbnail, index) => {
+        const active = index === currentIndex;
+        thumbnail.classList.toggle('is-active', active);
+        thumbnail.setAttribute('aria-pressed', String(active));
+      });
+
+      if (thumbnailStrip?.scrollTo) {
+        const centeredLeft = selected.offsetLeft - (thumbnailStrip.clientWidth - selected.clientWidth) / 2;
+        thumbnailStrip.scrollTo({ left: Math.max(centeredLeft, 0), behavior: reduceMotion ? 'auto' : 'smooth' });
+      }
+      if (moveFocus) selected.focus({ preventScroll: true });
+    };
+
+    previous?.addEventListener('click', () => updateGallery(currentIndex - 1));
+    next?.addEventListener('click', () => updateGallery(currentIndex + 1));
+    thumbnails.forEach((thumbnail, index) => {
+      thumbnail.addEventListener('click', () => updateGallery(index));
+      thumbnail.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        if (event.key === 'Home') updateGallery(0, true);
+        if (event.key === 'End') updateGallery(thumbnails.length - 1, true);
+        if (event.key === 'ArrowLeft') updateGallery(index - 1, true);
+        if (event.key === 'ArrowRight') updateGallery(index + 1, true);
+      });
+    });
+
+    updateGallery(0);
+  });
+
+  const hero = document.querySelector('.hero');
+  const portrait = document.querySelector('#heroPortrait');
+  if (hero && portrait && finePointer && !reduceMotion) {
+    let portraitFrame = 0;
+    hero.addEventListener('pointermove', (event) => {
+      const rect = hero.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 20;
+      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 20;
+      cancelAnimationFrame(portraitFrame);
+      portraitFrame = requestAnimationFrame(() => {
+        portrait.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0)`;
+      });
+    });
+    hero.addEventListener('pointerleave', () => {
+      portrait.style.transform = 'translate3d(0, 0, 0)';
+    });
+  }
+
+  if (finePointer && !reduceMotion) {
+    document.querySelectorAll('.magnetic').forEach((button) => {
+      button.addEventListener('pointermove', (event) => {
+        const rect = button.getBoundingClientRect();
+        const x = (event.clientX - rect.left - rect.width / 2) * 0.12;
+        const y = (event.clientY - rect.top - rect.height / 2) * 0.16;
+        button.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0)`;
+      });
+      button.addEventListener('pointerleave', () => {
+        button.style.transform = 'translate3d(0, 0, 0)';
+      });
+    });
+
+    const pointerLight = document.querySelector('.pointer-light');
+    if (pointerLight) {
+      let lightFrame = 0;
+      window.addEventListener('pointermove', (event) => {
+        cancelAnimationFrame(lightFrame);
+        lightFrame = requestAnimationFrame(() => {
+          pointerLight.style.opacity = '1';
+          pointerLight.style.transform = `translate3d(${event.clientX - 10}px, ${event.clientY - 10}px, 0) rotate(45deg)`;
+        });
+      }, { passive: true });
+      document.documentElement.addEventListener('mouseleave', () => {
+        pointerLight.style.opacity = '0';
+      });
+    }
+
+    const spotlightCards = document.querySelectorAll('.kpi-item, .case-study, .ranking-study, .workflow-product, .automation-panel, .credentials-grid article');
+    spotlightCards.forEach((card) => {
+      card.classList.add('spotlight-card');
+      card.addEventListener('pointermove', (event) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--spot-x', `${event.clientX - rect.left}px`);
+        card.style.setProperty('--spot-y', `${event.clientY - rect.top}px`);
+      });
+    });
+
+    document.querySelectorAll('.kpi-item, .case-study, .workflow-product').forEach((card) => {
+      card.classList.add('tilt-card');
+      card.addEventListener('pointermove', (event) => {
+        const rect = card.getBoundingClientRect();
+        const ratioX = (event.clientX - rect.left) / rect.width - 0.5;
+        const ratioY = (event.clientY - rect.top) / rect.height - 0.5;
+        const rotateY = ratioX * 3;
+        const rotateX = ratioY * -3;
+        const moveX = ratioX * 3;
+        const moveY = ratioY * 3;
+        card.style.transform = `perspective(1200px) translate3d(${moveX.toFixed(2)}px, ${moveY.toFixed(2)}px, 0) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.transform = 'perspective(1200px) translate3d(0, 0, 0) rotateX(0) rotateY(0)';
+      });
+    });
+  }
+})();

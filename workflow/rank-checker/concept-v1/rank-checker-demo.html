@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rank Checker — Portfolio demo</title>
+  <style>
+    :root{--ink:#17242d;--muted:#52616b;--paper:#f5f4f0;--white:#fff;--line:#d9dedb;--orange:#f26d45;--orange-lite:#ffdfd2;--mint:#cde9df;--blue:#dceaf5;--navy:#122631}
+    *{box-sizing:border-box}body{margin:0;background:#d5d9d8;color:var(--ink);font-family:"Segoe UI",Arial,sans-serif}.slide{width:1600px;height:900px;background:var(--paper);position:relative;overflow:hidden;padding:58px 76px 52px;display:none}.slide.active{display:block}.slide:after{content:"";position:absolute;right:-145px;top:-150px;width:430px;height:430px;border:1px solid rgba(242,109,69,.13);border-radius:50%;box-shadow:0 0 0 95px rgba(242,109,69,.035),0 0 0 190px rgba(242,109,69,.02);pointer-events:none}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;position:relative;z-index:1}.eyebrow{font-size:17px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}.eyebrow i{display:inline-block;width:11px;height:11px;background:var(--orange);border-radius:50%;margin-right:11px}.page{font-size:18px;color:var(--muted);font-weight:700;letter-spacing:.08em}.headline{font-size:58px;line-height:1.08;letter-spacing:-.045em;margin:0 0 18px;max-width:1150px;font-weight:750}.subtitle{font-size:22px;line-height:1.45;color:var(--muted);margin:0;max-width:1190px}.accent{color:#ce4f2a}.badge{display:inline-block;background:var(--orange-lite);color:#a83d1f;border-radius:100px;padding:10px 17px;font-size:17px;font-weight:700}.section-label{font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b5138}.footer{position:absolute;bottom:42px;left:76px;right:76px;border-top:1px solid var(--line);padding-top:18px;display:flex;justify-content:space-between;font-size:16px;color:var(--muted);font-weight:600}.footer strong{color:var(--ink)}.window{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 18px 40px rgba(16,37,49,.07)}.chrome{height:45px;background:#eff2f1;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;padding:0 18px;font-size:15px;font-weight:650;color:#52616b}.dot{width:10px;height:10px;border-radius:50%;background:#c7d0cd}.dot:nth-child(1){background:#f9a993}.dot:nth-child(2){background:#eed58e}.dot:nth-child(3){background:#a8d9c7}.tag{font-size:14px;font-weight:750;letter-spacing:.07em;text-transform:uppercase;border-radius:100px;padding:8px 12px;background:#edf1ef;color:#50636b}.callout{background:var(--navy);color:#fff;border-radius:19px;padding:20px 24px}.callout small{display:block;color:#b3c4c7;font-size:16px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px}.callout strong{display:block;font-size:22px;line-height:1.3}.callout p{font-size:17px;line-height:1.45;color:#d4e1e2;margin:10px 0 0}.num{display:inline-flex;width:36px;height:36px;border-radius:50%;align-items:center;justify-content:center;background:var(--orange);color:#fff;font-weight:800;font-size:17px;margin-right:10px}.arrow{font-size:30px;color:var(--orange);font-weight:800}.mini-note{font-size:16px;color:#62717a;line-height:1.35}.screen-label{position:absolute;top:16px;right:20px;font-size:13px;font-weight:800;letter-spacing:.08em;color:#6a797e;text-transform:uppercase}
+    /* 01 — Overview */
+    .overview-layout{display:grid;grid-template-columns: 1fr 390px;gap:26px;margin-top:45px}.pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.step{min-height:345px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:26px 24px;position:relative;display:flex;flex-direction:column}.step:before{content:attr(data-step);font-size:63px;font-weight:800;letter-spacing:-.08em;color:#d9e1dc;line-height:1}.step h2{font-size:25px;line-height:1.2;margin:auto 0 12px}.step p{font-size:17px;line-height:1.4;margin:0;color:var(--muted)}.step b{color:var(--ink)}.step.active{background:var(--navy);border-color:var(--navy);color:#fff}.step.active:before{color:#59727a}.step.active p,.step.active b{color:#d3e2e1}.overview-side{display:flex;flex-direction:column;gap:15px}.overview-side .callout{flex:1}.metric-strip{display:flex;gap:15px;margin-top:22px}.metric{flex:1;background:#e8eee9;padding:18px 22px;border-radius:17px}.metric b{display:block;font-size:29px;letter-spacing:-.04em}.metric span{display:block;color:var(--muted);font-size:16px;margin-top:3px}
+    /* 02 — Operations */
+    .ops-grid{display:grid;grid-template-columns: 870px 1fr;gap:24px;margin-top:35px}.sheet{height:450px}.sheet-title{padding:19px 24px 16px;font-size:22px;font-weight:750;display:flex;justify-content:space-between}.sheet-table{width:100%;border-collapse:collapse;font-size:17px}.sheet-table th{text-align:left;background:#e8f3eb;font-size:16px;color:#3f5a4c}.sheet-table td,.sheet-table th{padding:17px 19px;border-top:1px solid #e2e6e2;border-right:1px solid #e6eae7}.sheet-table td:first-child{color:#7b888b;width:48px}.sheet-table tr:nth-child(2){background:#fff7f2}.sheet-table .sample{color:#9a9f9d;font-style:italic}.ops-right{display:flex;flex-direction:column;gap:13px}.command{border-radius:15px;padding:15px 18px;background:#fff;border:1px solid var(--line);display:flex;gap:15px;align-items:center}.command .cmd-icon{width:44px;height:44px;border-radius:12px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:24px;flex:none}.command b{display:block;font-size:18px}.command code{font-size:15px;color:#6c7980}.command.primary{border-color:#f4a083;background:#fff6f1}.command.primary .cmd-icon{background:var(--orange-lite)}.ops-bottom{display:grid;grid-template-columns:repeat(3,1fr);gap:17px;margin-top:22px}.annotation{display:flex;gap:10px;align-items:flex-start;font-size:18px;line-height:1.3;font-weight:650}.annotation .num{flex:none;margin:0}
+    /* 03 — Matcher */
+    .matcher-grid{display:grid;grid-template-columns: 570px 1fr;gap:26px;margin-top:27px}.phone{background:#fff;border:8px solid #17242d;border-radius:36px;height:493px;width:340px;margin:0 auto;overflow:hidden;box-shadow:0 17px 30px rgba(16,37,49,.13)}.phone-bar{height:35px;background:#fff;display:flex;justify-content:space-between;padding:10px 22px;color:#36454b;font-size:12px;font-weight:700}.search-box{margin:8px 13px 14px;border:1px solid #dfe4e1;border-radius:40px;padding:11px 15px;font-size:14px;color:#243039;box-shadow:0 3px 10px rgba(0,0,0,.04)}.result{padding:12px 16px;border-top:1px solid #eef0ee;font-size:14px}.result .url{color:#62737a;font-size:11px;margin:3px 0}.result b{color:#244f80;display:block;font-size:14px}.result small{color:#687b7d;line-height:1.3}.result.hit-sp{background:#e5f2ee;border-left:5px solid #4a9e7b}.result.hit-tin{background:#fff0e9;border-left:5px solid var(--orange)}.phone-caption{font-size:17px;text-align:center;font-weight:700;margin-top:12px}.matcher-left{position:relative}.matcher-left:after{content:"TOP 20";position:absolute;left:20px;top:20px;background:var(--navy);color:#fff;padding:9px 12px;border-radius:8px;font-size:16px;font-weight:750}.decision{display:flex;flex-direction:column;gap:16px}.logic-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:23px 28px}.logic-card h2{font-size:24px;margin:0 0 13px}.logic-card p{font-size:18px;line-height:1.4;color:var(--muted);margin:0}.rank-pill{display:inline-block;padding:10px 14px;border-radius:11px;font-size:21px;font-weight:800;margin-left:8px}.rank-pill.green{background:var(--mint);color:#1f6f54}.rank-pill.orange{background:var(--orange-lite);color:#b34723}.decision .callout{margin-top:2px}
+    /* 04 — Recovery / result */
+    .recovery-grid{display:grid;grid-template-columns: 1fr 600px;gap:22px;margin-top:32px}.recovery-flow{display:flex;flex-direction:column;gap:12px}.recovery-row{display:flex;align-items:center;gap:15px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 22px;min-height:78px}.recovery-row .num{flex:none}.recovery-row strong{display:block;font-size:19px}.recovery-row span{display:block;font-size:16px;color:var(--muted);margin-top:2px}.recovery-row.accent-row{background:var(--navy);border-color:var(--navy);color:#fff}.recovery-row.accent-row span{color:#bed0d1}.terminal{height:266px;background:#0f202b;color:#d8e9e8;border-radius:19px;overflow:hidden}.terminal .chrome{background:#233642;border-color:#304b55;color:#c4d7d8}.terminal-lines{padding:20px 24px;font:17px/1.65 Consolas,"Courier New",monospace}.terminal-lines .ok{color:#9ddcc0}.terminal-lines .warn{color:#ffba93}.result-table{background:#fff;border:1px solid var(--line);border-radius:19px;overflow:hidden;margin-top:15px}.result-table .sheet-title{font-size:20px;padding:15px 19px}.result-table table{width:100%;border-collapse:collapse;font-size:15px}.result-table td,.result-table th{text-align:left;padding:12px 14px;border-top:1px solid #e3e8e5}.result-table th{background:#e8f3eb;font-size:14px}.result-table td:last-child{font-weight:700;color:#b64d2b}.small-disclaimer{font-size:15px;color:#6d7b7e;margin-top:12px;font-weight:600}
+    /* Export fit at 1600 × 900 */
+    .ops-grid{margin-top:28px}.ops-right{gap:9px}.command{padding:9px 14px}.command .cmd-icon{width:38px;height:38px}.ops-right .callout{padding:14px 18px}.ops-right .callout small{font-size:14px;margin-bottom:4px}.ops-right .callout strong{font-size:19px}.ops-right .callout p{font-size:15px;margin-top:6px}.ops-bottom{display:none}
+    .matcher-grid{margin-top:25px}.phone{height:445px}.phone-caption{margin-top:8px;font-size:15px}.decision{gap:9px}.logic-card{padding:15px 20px}.logic-card h2{font-size:21px;margin-bottom:7px}.logic-card p{font-size:16px;line-height:1.3}.decision .callout{padding:15px 20px}.decision .callout small{font-size:14px;margin-bottom:4px}.decision .callout strong{font-size:19px}.decision .callout p{font-size:15px;margin-top:6px;line-height:1.3}
+    .recovery-grid{margin-top:25px}.recovery-row{min-height:72px;padding:12px 18px}.recovery-row div>span{display:block;font-size:15px;color:var(--muted);margin-top:2px}.recovery-row.accent-row div>span{color:#bed0d1}.recovery-row .num{display:flex;align-items:center;justify-content:center;color:#fff;margin:0}.terminal{height:222px}.terminal-lines{padding:14px 20px;font-size:15px;line-height:1.48}.result-table{margin-top:11px}.result-table .sheet-title{padding:11px 17px;font-size:18px}.result-table td,.result-table th{padding:8px 12px}.small-disclaimer{font-size:13px;margin-top:7px}
+  </style>
+</head>
+<body>
+  <section class="slide" data-slide="1">
+    <div class="top"><span class="eyebrow"><i></i>CASE STUDY / RANK CHECKER</span><span class="badge">ĐANG VẬN HÀNH</span></div>
+    <h1 class="headline">Biến việc đo rank thủ công thành<br><span class="accent">một quy trình có thể chạy lại</span></h1>
+    <p class="subtitle">Tôi tự thiết kế và xây công cụ local để đọc danh sách keyword, kiểm tra Google mobile Việt Nam, phân loại URL AVAKids và ghi kết quả về cùng một Google Sheet.</p>
+    <div class="overview-layout">
+      <div class="pipeline">
+        <div class="step" data-step="01"><h2>Nhận đầu vào</h2><p>Đọc keyword và các cột kết quả từ <b>Google Sheet</b>.</p></div>
+        <div class="step active" data-step="02"><h2>Kiểm tra SERP</h2><p>Mở <b>Chrome mobile</b>, duyệt 2 trang kết quả đầu.</p></div>
+        <div class="step" data-step="03"><h2>Ghép đúng URL</h2><p>Tách <b>trang sản phẩm</b> và <b>bài tin</b> theo quy tắc URL.</p></div>
+        <div class="step" data-step="04"><h2>Ghi & tiếp tục</h2><p>Cập nhật rank, thời gian và lưu <b>checkpoint</b> theo từng dòng.</p></div>
+      </div>
+      <div class="overview-side">
+        <div class="callout"><small>Quyết định thiết kế</small><strong>Giữ Sheet là giao diện vận hành</strong><p>Người dùng xem và lọc kết quả trong công cụ quen thuộc; phần tự động chạy phía sau.</p></div>
+        <div class="callout"><small>Vai trò của tôi</small><strong>Từ bài toán SEO đến mã nguồn và vận hành</strong><p>Thiết kế logic, kết nối dữ liệu, xử lý lỗi và tối ưu khả năng chạy tiếp.</p></div>
+      </div>
+    </div>
+    <div class="footer"><span><strong>01 / 04</strong> · Toàn cảnh hệ thống</span><span>AVAKids Rank Checker · Case study</span></div>
+  </section>
+
+  <section class="slide" data-slide="2">
+    <div class="top"><span class="eyebrow"><i></i>THAO TÁC VẬN HÀNH</span><span class="page">02 / 04</span></div>
+    <h1 class="headline">Một Sheet để nhập liệu.<br><span class="accent">Ba chế độ để chạy đúng việc.</span></h1>
+    <p class="subtitle">Không cần dashboard riêng: cấu trúc cột rõ ràng, lệnh test nhỏ trước khi chạy toàn bộ và lịch chạy hằng tuần.</p>
+    <div class="ops-grid">
+      <div class="window sheet">
+        <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="margin-left:12px">Google Sheet · Danh sách keyword</span><span class="tag" style="margin-left:auto">MÔ PHỎNG</span></div>
+        <div class="sheet-title"><span>AVAKids / Keyword tracking</span><span class="tag">INPUT + OUTPUT</span></div>
+        <table class="sheet-table"><thead><tr><th></th><th>keywords</th><th>url_sp</th><th>rank_sp</th><th>url_tin</th><th>rank_tin</th></tr></thead><tbody>
+          <tr><td>2</td><td>sữa bột cho bé</td><td class="sample">chờ cập nhật</td><td>—</td><td class="sample">chờ cập nhật</td><td>—</td></tr>
+          <tr><td>3</td><td>bỉm cho trẻ sơ sinh</td><td class="sample">chờ cập nhật</td><td>—</td><td class="sample">chờ cập nhật</td><td>—</td></tr>
+          <tr><td>4</td><td>đồ chơi cho bé 1 tuổi</td><td class="sample">chờ cập nhật</td><td>—</td><td class="sample">chờ cập nhật</td><td>—</td></tr>
+          <tr><td>5</td><td>máy hút sữa</td><td class="sample">chờ cập nhật</td><td>—</td><td class="sample">chờ cập nhật</td><td>—</td></tr>
+        </tbody></table>
+        <div style="padding:17px 22px;font-size:16px;color:#62717a">Cột <b>time</b> lưu thời điểm kiểm tra; mỗi keyword ghi kết quả trở lại đúng dòng.</div>
+      </div>
+      <div class="ops-right">
+        <div class="command primary"><span class="cmd-icon">✓</span><span><b>Test 5 keyword</b><code>01-Test-5-Keywords.cmd</code></span></div>
+        <div class="command"><span class="cmd-icon">↻</span><span><b>Chạy lượt mới</b><code>02-Run-Full-New-Run.cmd</code></span></div>
+        <div class="command"><span class="cmd-icon">↗</span><span><b>Tiếp tục lượt dở</b><code>03-Resume.cmd</code></span></div>
+        <div class="command"><span class="cmd-icon">▦</span><span><b>Lịch chạy hằng tuần</b><code>Windows Task Scheduler</code></span></div>
+        <div class="callout"><small>Tư duy UI/UX</small><strong>Ít thao tác, rõ tình huống</strong><p>Mỗi nút giải quyết một nhu cầu vận hành cụ thể: thử, chạy mới hoặc tiếp tục.</p></div>
+      </div>
+    </div>
+    <div class="ops-bottom"><div class="annotation"><span class="num">1</span><span>Nhập keyword tại Sheet</span></div><div class="annotation"><span class="num">2</span><span>Test nhanh trước khi chạy danh sách</span></div><div class="annotation"><span class="num">3</span><span>Ghi kết quả về cùng nguồn dữ liệu</span></div></div>
+    <div class="footer"><span><strong>Ảnh dựng từ cấu trúc file thật</strong> · Dữ liệu trong bảng là minh họa</span><span>AVAKids Rank Checker · Case study</span></div>
+  </section>
+
+  <section class="slide" data-slide="3">
+    <div class="top"><span class="eyebrow"><i></i>LOGIC ĐO THỨ HẠNG</span><span class="page">03 / 04</span></div>
+    <h1 class="headline">Một keyword có thể có<br><span class="accent">hai loại URL cần theo dõi</span></h1>
+    <p class="subtitle">Tôi tách kết quả sản phẩm và bài tin thay vì gộp mọi URL cùng domain thành một con số rank.</p>
+    <div class="matcher-grid">
+      <div class="matcher-left">
+        <div class="phone"><div class="phone-bar"><span>9:41</span><span>▰ ▰ ▰</span></div><div class="search-box">⌕ &nbsp; sữa bột cho bé</div>
+          <div class="result"><b>Hướng dẫn chọn sữa cho trẻ</b><div class="url">ví dụ: website-a.vn/... </div><small>Thông tin tham khảo về sản phẩm...</small></div>
+          <div class="result hit-sp"><b>#4 · Sữa bột cho bé | AVAKids</b><div class="url">avakids.com/sua-bot/...</div><small>Trang sản phẩm được nhận diện.</small></div>
+          <div class="result"><b>Các tiêu chí chọn sữa</b><div class="url">ví dụ: website-b.vn/...</div><small>Bài viết tham khảo...</small></div>
+          <div class="result hit-tin"><b>#9 · Cách chọn sữa phù hợp</b><div class="url">avakids.com/me-va-be/...</div><small>Bài tin được nhận diện riêng.</small></div>
+        </div>
+        <div class="phone-caption">Google mobile Việt Nam · 2 trang đầu · tối đa Top 20</div>
+      </div>
+      <div class="decision">
+        <div class="logic-card"><h2>01 · Đọc SERP theo thứ tự</h2><p>Chrome giả lập thiết bị di động, lấy URL từ từng kết quả và loại URL trùng.</p></div>
+        <div class="logic-card" style="border-left:7px solid #4a9e7b"><h2>02 · Trang sản phẩm <span class="rank-pill green">#4</span></h2><p>URL chứa <b>avakids.com</b> nhưng không thuộc <b>/me-va-be</b> → ghi <b>url_sp / rank_sp</b>.</p></div>
+        <div class="logic-card" style="border-left:7px solid var(--orange)"><h2>03 · Bài tin <span class="rank-pill orange">#9</span></h2><p>URL chứa <b>avakids.com/me-va-be</b> → ghi <b>url_tin / rank_tin</b>.</p></div>
+        <div class="callout"><small>Quy tắc quan trọng</small><strong>Lấy vị trí cao nhất của từng nhóm URL</strong><p>Nếu không tìm thấy trong Top 20, ô tương ứng để trống; không suy đoán thứ hạng.</p></div>
+      </div>
+    </div>
+    <div class="footer"><span><strong>Mô phỏng từ logic mã nguồn</strong> · Vị trí #4 và #9 chỉ để minh họa</span><span>AVAKids Rank Checker · Case study</span></div>
+  </section>
+
+  <section class="slide" data-slide="4">
+    <div class="top"><span class="eyebrow"><i></i>THIẾT KẾ CHỊU GIÁN ĐOẠN</span><span class="page">04 / 04</span></div>
+    <h1 class="headline">Gặp CAPTCHA thì dừng đúng chỗ.<br><span class="accent">Chạy lại mà không làm lại từ đầu.</span></h1>
+    <p class="subtitle">Mỗi dòng hoàn thành được ghi ngay vào Sheet và checkpoint. Khi Google chặn truy cập, quy trình tạm dừng, hẹn chạy tiếp và bỏ qua các dòng đã xong.</p>
+    <div class="recovery-grid">
+      <div class="recovery-flow">
+        <div class="recovery-row"><span class="num">1</span><div><strong>Hoàn tất keyword → ghi Sheet + checkpoint</strong><span>Trạng thái theo từng dòng giúp khôi phục chính xác.</span></div></div>
+        <div class="recovery-row accent-row"><span class="num">2</span><div><strong>Phát hiện CAPTCHA → dừng phiên Chrome</strong><span>Lưu dòng đang dở, không cố vượt CAPTCHA.</span></div></div>
+        <div class="recovery-row"><span class="num">3</span><div><strong>Hẹn chạy lại sau 30–45 phút</strong><span>Windows Scheduled Task tạo lượt tiếp tục tự động.</span></div></div>
+        <div class="recovery-row"><span class="num">4</span><div><strong>Resume → bỏ qua dòng đã hoàn thành</strong><span>Chạy tiếp từ keyword còn lại và cập nhật đúng dòng.</span></div></div>
+      </div>
+      <div>
+        <div class="terminal"><div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="margin-left:11px">Rank Checker · luồng console minh họa</span></div><div class="terminal-lines"><div class="ok">✓ Row 12: SP rank=4 TIN rank=9</div><div class="ok">✓ Saved checkpoint: row 12 done</div><div class="warn">! CAPTCHA detected at row 13</div><div>↻ Auto resume scheduled: 30–45 min</div><div>→ Next run skips completed rows</div></div></div>
+        <div class="result-table"><div class="sheet-title"><span>Kết quả trả về Sheet</span><span class="tag">MINH HỌA</span></div><table><thead><tr><th>keywords</th><th>rank_sp</th><th>rank_tin</th><th>time</th></tr></thead><tbody><tr><td>sữa bột cho bé</td><td>4</td><td>9</td><td>10:42</td></tr><tr><td>bỉm cho trẻ sơ sinh</td><td>7</td><td>—</td><td>10:44</td></tr></tbody></table></div>
+        <div class="small-disclaimer">Số rank và timestamp chỉ mô tả cấu trúc đầu ra, không phải kết quả đo thật.</div>
+      </div>
+    </div>
+    <div class="footer"><span><strong>Điểm tôi tối ưu:</strong> khả năng tiếp tục, tránh xử lý lặp và minh bạch trạng thái</span><span>AVAKids Rank Checker · Case study</span></div>
+  </section>
+  <script>const n=Number(new URLSearchParams(location.search).get('slide')||1);document.querySelector(`[data-slide="${Math.min(4,Math.max(1,n))}"]`).classList.add('active');</script>
+</body>
+</html>

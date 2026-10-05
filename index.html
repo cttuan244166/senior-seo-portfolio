@@ -6,494 +6,868 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Châu Thanh Tuấn | Senior SEO Specialist & SEO Leader</title>
   <meta name="description"
-    content="Portfolio của Châu Thanh Tuấn, Senior SEO Specialist định hướng SEO Leader, tập trung SEO strategy, E-commerce growth, reporting và automation workflow." />
+    content="Portfolio của Châu Thanh Tuấn - Senior SEO Specialist định hướng SEO Leader, tập trung E-commerce SEO, tăng trưởng Organic và Automation Workflow." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260713-polish-1" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23050505'/%3E%3Cpath d='M14 15h36v10H38v25H26V25H14z' fill='%23d1ffca'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css?v=20261005-interactions" />
 </head>
 
 <body>
-  <canvas class="ambient-canvas" id="ambientCanvas" aria-hidden="true"></canvas>
   <div class="page-progress" aria-hidden="true"><span></span></div>
+  <div class="pointer-light" aria-hidden="true"></div>
 
-  <aside class="mascot-guide" aria-label="Mascot Tuấn hướng dẫn nội dung" data-side="right" data-pose="intro">
-    <img id="mascotImage" src="assets/mascot-intro.png" alt="Mascot Tuấn 3D đang giới thiệu bản thân" />
-    <span id="mascotMessage" class="sr-only">Bắt đầu với chân dung tổng quan nhé.</span>
-  </aside>
-
-  <header class="site-header" id="top">
+  <header class="site-header" id="siteHeader">
     <a class="brand" href="#top" aria-label="Về đầu trang">
-      <span class="brand-mark">P</span>
-      <span>Châu Thanh Tuấn</span>
+      <span class="brand-mark">CT</span>
+      <span class="brand-name">Châu Thanh Tuấn</span>
     </a>
-    <nav class="nav-links" aria-label="Điều hướng chính">
-      <a href="#about">Giới thiệu</a>
-      <a href="#timeline">Quá trình làm việc</a>
-      <a href="#impact">Hiệu suất</a>
-      <a href="#charts">Kết quả</a>
-      <a href="#career">Mục tiêu</a>
+
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav">
+      <span></span><span></span><span class="sr-only">Mở menu</span>
+    </button>
+
+    <nav class="nav-links" id="mainNav" aria-label="Điều hướng chính">
+      <a href="#experience">Kinh nghiệm</a>
+      <a href="#case-studies">Case Study</a>
+      <a href="#process">Quy trình</a>
+      <a href="#career">Career path</a>
+      <a class="nav-contact" href="#contact">Liên hệ</a>
     </nav>
-    <a class="header-cta liquid-btn" href="#contact">Liên hệ</a>
   </header>
 
-  <main>
-    <section class="hero section-shell" aria-labelledby="hero-title" data-guide="Bắt đầu với chân dung tổng quan nhé."
-      data-pose="intro">
-      <div class="hero-copy reveal">
-        <p class="eyebrow">Senior SEO Specialist | SEO Leader</p>
-        <h1 id="hero-title">Châu Thanh Tuấn</h1>
-        <p class="hero-lead">
-          Em đã có 6 năm kinh nghiệm triển khai chiến lược SEO cho các website E-commerce, từ thiết lập các chiến lược
-          dài hạn, research keyword theo insight, tối ưu content, technical SEO,... tạo dashboard, report và triển khai các
-          automation workflows.
-        </p>
-        <div class="hero-actions">
-          <a class="primary-btn liquid-btn" href="#impact">Xem kết quả</a>
-          <a class="secondary-btn liquid-btn" href="#timeline">Quá trình làm việc</a>
-        </div>
-        <dl class="quick-info" aria-label="Thông tin nhanh">
-          <div class="quick-phone">
-            <dt>Số điện thoại:</dt>
-            <dd>081.945.2171</dd>
-          </div>
-          <div class="quick-location">
-            <dt>Địa chỉ:</dt>
-            <dd>Nguyễn Kiệm, Phú Nhuận, Hồ Chí Minh</dd>
-          </div>
-          <div class="quick-email">
-            <dt>Email</dt>
-            <dd>th.tuanchau96@gmail.com</dd>
-          </div>
-        </dl>
-      </div>
+  <main id="top">
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-plate" id="heroPortrait" aria-hidden="true"></div>
+      <div class="hero-grain" aria-hidden="true"></div>
 
-      <div class="hero-visual reveal">
-        <div class="hero-orbit" aria-hidden="true">
-          <span>AI tools</span>
-          <span>SEO</span>
-          <span>Traffic</span>
-          <span>Content</span>
-          <span>Automation</span>
-        </div>
-        <div class="portrait-frame portrait-hex">
-          <img src="assets/hero-portrait-v2.png" alt="Ảnh đại diện portfolio 3D có kính" />
-        </div>
-        <div class="floating-metric metric-one">
-          <span>Organic Sessions</span>
-          <strong data-counter data-prefix="+" data-count="243" data-suffix="%">+0%</strong>
-        </div>
-        <div class="floating-metric metric-two">
-          <span>SEO Experience</span>
-          <strong data-counter data-count="6" data-suffix=" năm">0 năm</strong>
-        </div>
-      </div>
-    </section>
-
-    <section class="intro-band" id="about" data-guide="Đây là phần HR hiểu bạn là ai và mạnh ở đâu." data-pose="about">
-      <div class="section-shell compact-band">
-        <div class="section-heading compact-heading reveal">
-          <p class="eyebrow">Thông tin cá nhân</p>
-          <h2>SEO Specialist lên chiến lược, phân tích đối thủ, mô tả guideline và phối hợp Content.</h2>
-        </div>
-        <div class="intro-copy reveal">
-          <p>
-            Có khả năng phân tích, xây dựng chiến lược SEO từ 6 - 12 tháng theo mục tiêu từ Ngành Hàng, nghiên cứu từ
-            khóa đúng insight,
-            tối ưu content, technical SEO, report và automation workflow để tăng Organic Traffic,
-            cải thiện thứ hạng và cân bằng mục tiêu giữa Traffic, Ranking, Revenue và Conversion.
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="hero-eyebrow hero-enter">Senior SEO Specialist / SEO Leader</p>
+          <h1 id="heroTitle" class="hero-title" aria-label="Châu Thanh Tuấn">
+            <span class="title-line"><span>CHÂU THANH</span></span>
+            <span class="title-line"><span>TUẤN</span></span>
+          </h1>
+          <p class="hero-role hero-enter">6 năm kinh nghiệm SEO Specialist</p>
+          <p class="hero-lead hero-enter">
+            Xây dựng chiến lược, kế hoạch Audit Technical, On-page, Off-page, phối hợp cùng Content và luôn tối ưu, tự
+            động hóa, built Workflow tự động để tăng hiệu xuất, tạo tăng trưởng Organic bền vững, gắn với mục tiêu
+            Ranking, Conversion và Revenue.
           </p>
-          <div class="profile-grid">
-            <div>
-              <span>Vai trò mục tiêu</span>
-              <strong>Senior SEO Specialist</strong>
-            </div>
-            <div>
-              <span>Kinh nghiệm</span>
-              <strong>5-6 năm</strong>
-            </div>
-            <div>
-              <span>Thế mạnh</span>
-              <strong>SEO Strategy, tối ưu content, đảm bảo đúng rule SEO, tự động hóa trong công việc</strong>
-            </div>
-            <div>
-              <span>Phân tích</span>
-              <strong>Data-driven, phối hợp nhiều kênh để có nhiều góc nhìn, phối hợp liên phòng ban</strong>
-            </div>
+          <div class="hero-tags hero-enter" aria-label="Năng lực nổi bật">
+            <span>SEO Strategy</span>
+            <span>Data-driven</span>
+            <span>Team Coordination</span>
+            <span>AI Automation</span>
+          </div>
+          <div class="hero-actions hero-enter">
+            <a class="button button-light magnetic" href="#case-studies">Xem Case Study</a>
+            <a class="button button-ghost magnetic email-action" href="#contact">Trao đổi thêm</a>
           </div>
         </div>
+
       </div>
+
+      <nav class="hero-agenda" aria-label="Nội dung portfolio">
+        <a href="#experience"><span>01</span>Kinh nghiệm</a>
+        <a href="#case-studies"><span>02</span>Case Study</a>
+        <a href="#process"><span>03</span>Quy trình</a>
+        <a href="#career"><span>04</span>Career path</a>
+        <a href="#contact"><span>05</span>Liên hệ</a>
+      </nav>
     </section>
 
-    <section class="section-shell" id="timeline" data-guide="Timeline giúp câu chuyện nghề nghiệp có mạch rõ ràng."
-      data-pose="timeline">
-      <div class="section-heading narrow reveal">
-        <p class="eyebrow">Quá trình làm việc</p>
-        <h2>Hành trình 2020 - 2026</h2>
-        <p><i>Chọn từng cột mốc để xem chi tiết công việc, vai trò và kết quả nổi bật.</i></p>
-      </div>
-      <div class="experience-morph reveal">
-        <div class="experience-track" role="tablist" aria-label="Kinh nghiệm làm việc">
-          <button class="experience-tab is-active" type="button" data-experience="0" role="tab" aria-selected="true">
-            <span>09/2024 - 06/2026</span>
-            <strong>AVAKids</strong>
-          </button>
-          <button class="experience-tab" type="button" data-experience="1" role="tab" aria-selected="false">
-            <span>08/2022 - 06/2024</span>
-            <strong>ROUTINE</strong>
-          </button>
-          <button class="experience-tab" type="button" data-experience="2" role="tab" aria-selected="false">
-            <span>11/2020 - 06/2022</span>
-            <strong>Dr. Check Clinic</strong>
-          </button>
-          <button class="experience-tab" type="button" data-experience="3" role="tab" aria-selected="false">
-            <span>04/2020 - 11/2020</span>
-            <strong>DEVI Kids</strong>
-          </button>
+    <section class="about-band section-light" aria-labelledby="aboutTitle">
+      <div class="section-shell about-grid">
+        <div class="about-heading reveal">
+          <p class="eyebrow">About me</p>
+          <h2 id="aboutTitle">Senior SEO Specialist có tư duy chiến lược, data-driven.</h2>
         </div>
-        <div class="experience-panel">
-          <article class="experience-detail is-active" data-experience-panel="0">
-            <p class="eyebrow">SEO Specialist</p>
-            <h3>Chuỗi Mẹ & Bé AVAKids (MWG)</h3>
-            <p>
-              Xây dựng và triển khai chiến lược SEO tổng thể từ 6 - 12 tháng cho 786 URL bao gồm trang danh mục và sản
-              phẩm,
-              phối hợp Ngành Hàng, Content, PM, Design để đạt được hiệu quả cân bằng giữa Traffic, Ranking, Revenue và
-              Conversion Rate.
-            </p>
-            <ul>
-              <li>Hoàn thành gần 91% mục tiêu tăng trưởng đặt ra.</li>
-              <li>Tăng 83% Organic Sessions trong 5 tháng đầu.</li>
-              <li>Hơn 45% bộ từ khóa sản phẩm mục tiêu vào Top 1-3, 35% vào Top 4-10.</li>
-              <li>Xây dựng dashboard, report và automation workflow theo dõi SEO định kỳ.</li>
-            </ul>
-            <button class="detail-btn liquid-btn" type="button" data-modal="avakids">Xem thêm</button>
-          </article>
-          <article class="experience-detail" data-experience-panel="1">
-            <p class="eyebrow">SEO Executive</p>
-            <h3>ROUTINE</h3>
-            <p>
-              Triển khai SEO cho website thương hiệu thời trang, mở rộng bộ từ khóa sản phẩm,
-              tối ưu blog, sản phẩm, internal link và phối hợp Design, IT, Developer để cải thiện layout và conversion.
-            </p>
-            <ul>
-              <li>Tăng 117% Organic Traffic trong 6 tháng đầu.</li>
-              <li>Tăng hơn 243% Organic Sessions và 250% Click sau 1 năm.</li>
-              <li>Bộ từ khóa sản phẩm tăng từ 200 lên khoảng 850 keyword.</li>
-              <li>Quản lý content full-time, intern, freelancer và phối hợp Design, IT, Developer.</li>
-            </ul>
-            <button class="detail-btn liquid-btn" type="button" data-modal="routine">Xem thêm</button>
-          </article>
-          <article class="experience-detail" data-experience-panel="2">
-            <p class="eyebrow">SEO Executive</p>
-            <h3>Dr. Check Clinic</h3>
-            <ul>
-              <li>Xây dựng outline, phân tích nội dung, viết bài chuẩn SEO và triển khai entity cho website.</li>
-              <li>Nghiên cứu, lập danh sách từ khóa bằng Ahrefs, Keywordtool.io và Google Keyword Planner.</li>
-              <li>Xây dựng backlink và hệ thống site vệ tinh như Blogger, Webflow.</li>
-              <li>Lên kế hoạch nội dung, visual, timeline và quản trị các kênh social như Facebook, Google Business.
-              </li>
-              <li>Phân tích và lập báo cáo hiệu suất SEO hằng tháng bằng Google Analytics, Google Search Console và
-                Ahrefs.</li>
-            </ul>
-          </article>
-          <article class="experience-detail" data-experience-panel="3">
-            <p class="eyebrow">Digital Marketing</p>
-            <h3>DEVI Kids Import-Export Company</h3>
-            <p>
-              Giai đoạn khởi đầu trong Digital Marketing. Resume hiện chưa mô tả chi tiết kênh phụ trách, KPI hoặc dự án
-              nổi bật.
-            </p>
-            <ul>
-              <li>Lập kế hoạch triển khai Facebook Ads và Google Ads.
-              <li>Nghiên cứu, xây dựng danh sách từ khóa bằng Google Keyword Planner và Keywordtool.io.</li>
-              <li>Chụp ảnh, chỉnh sửa hình ảnh sản phẩm phục vụ nội dung marketing.</li>
-              <li>Lên kế hoạch content, visual và quản trị nội dung trên Facebook.</li>
-              <li>Phân tích hiệu quả và lập báo cáo marketing hằng tháng.</li>
-            </ul>
-          </article>
+        <div class="about-copy reveal">
+          <p>
+            Tôi có 6 năm kinh nghiệm lên kế hoạch và triển khai chiến lược SEO cho các website E-commerce. Thế mạnh
+            của tôi là nghiên cứu từ khóa theo Search Insight, tối ưu Content, xây dựng các rule chuẩn SEO cùng các quy
+            trình tối ưu, đo rank tự động hóa thông qua các công cụ Workflow để tạo tăng trưởng Traffic Organic bền
+            vững, mang lại chuyển đổi Doanh thu theo mục tiêu Ngành Hàng.
+          </p>
+          <dl class="about-profile">
+            <div>
+              <dt>Vị trí mục tiêu</dt>
+              <dd>Senior SEO Specialist - SEO Leader</dd>
+            </div>
+            <div>
+              <dt>Kinh nghiệm</dt>
+              <dd>6 năm</dd>
+            </div>
+            <div>
+              <dt>Điểm mạnh</dt>
+              <dd>SEO Strategy, Audit On-page, Off-page, Link Building, Workflow Automation</dd>
+            </div>
+            <div>
+              <dt>Kỹ năng</dt>
+              <dd>Data-driven, phối hợp liên phòng ban</dd>
+            </div>
+            <div>
+              <dt>Địa chỉ</dt>
+              <dd>Phú Nhuận, Tp.Hồ Chí Minh</dd>
+            </div>
+          </dl>
         </div>
       </div>
     </section>
 
-    <section class="impact-section" id="impact" data-guide="KPI nên nổi bật, dễ scan và có số chạy khi HR kéo tới."
-      data-pose="kpi">
+    <section class="section section-light" id="experience" data-nav-section>
       <div class="section-shell">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Kết quả đạt được</p>
-          <h2>Chỉ số tăng trưởng và tỷ lệ hoàn thành mục tiêu.</h2>
+        <div class="chapter-divider reveal">
+          <span>01 / KINH NGHIỆM</span>
+          <span>2020 - 2026</span>
         </div>
-        <div class="impact-grid">
-          <article class="impact-card reveal">
-            <span class="metric" data-counter data-prefix="+" data-count="243" data-suffix="%">+0%</span>
-            <h3>Organic Sessions tại ROUTINE</h3>
-            <p>Tăng hơn 243% Organic Sessions sau 1 năm triển khai SEO.</p>
-          </article>
-          <article class="impact-card reveal">
-            <span class="metric" data-counter data-prefix="+" data-count="83" data-suffix="%">+0%</span>
-            <h3>Organic Sessions tại AVAKids</h3>
-            <p>Tăng 83% Organic Sessions trong 5 tháng đầu cho nhóm danh mục và sản phẩm.</p>
-          </article>
-          <article class="impact-card reveal">
-            <span class="metric" data-counter data-count="45" data-suffix="%">0%</span>
-            <h3>Từ khóa sản phẩm Top 1-3</h3>
-            <p>Hơn 45% bộ từ khóa sản phẩm mục tiêu tại AVAKids đạt Top 1-3.</p>
-          </article>
-          <article class="impact-card reveal">
-            <span class="metric" data-counter data-prefix="+" data-count="250" data-suffix="%">+0%</span>
-            <h3>Click tăng trưởng</h3>
-            <p>Tăng 250% Click sau 1 năm trong case SEO Growth cho ROUTINE.</p>
-          </article>
-        </div>
-      </div>
-    </section>
 
-    <section class="section-shell charts-section" id="charts"
-      data-guide="Các case study này giúp HR nhìn nhanh kết quả thật từ AVAKids và ROUTINE." data-pose="chart">
-      <div class="section-heading case-heading reveal">
-        <p class="eyebrow">Case Study 1</p>
-        <h2>TRAFFIC AVAKids 2025</h2>
-        <p>Organic Sessions và Tổng Volume Search theo thứ hạng keyword.</p>
-      </div>
-      <div class="case-study-grid">
-        <article class="chart-card case-study-card case-study-wide reveal">
-          <div class="chart-head">
-            <div>
-              <span>AVAKids Organic Sessions</span>
-              <strong data-counter data-prefix="+" data-count="83" data-suffix="%">+0%</strong>
-            </div>
-            <em>01/2025 - 12/2025</em>
+        <div class="section-intro reveal">
+          <div>
+            <p class="eyebrow">Work Experience</p>
+            <h2>Lập kế hoạch theo nhu cầu tìm kiếm của người dùng giúp tăng trưởng bền vững.</h2>
           </div>
-          <p class="case-study-meta">
-            Mục tiêu tăng trưởng +21% Organic Sessions trung bình/ngày, triển khai cho 786 URL danh mục và sản phẩm,
-            hoàn thành khoảng 91% target.
-          </p>
-          <svg class="line-chart" viewBox="0 0 720 260" data-labels="Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec"
-            data-values="100,100,100,99,99,150,120,108,103,110,112,115" data-unit="%"></svg>
-          <div class="chart-foot">
-            <span>Organic Sessions theo tháng.</span>
-            <strong>+83% trong 5 tháng đầu</strong>
-          </div>
-        </article>
-        <article class="chart-card case-study-card case-study-wide reveal">
-          <div class="chart-head">
-            <div>
-              <span>AVAKids Volume Search by Ranking</span>
-              <strong data-counter data-count="45" data-suffix="%">0%</strong>
-            </div>
-            <em>Top 1-3 keyword group</em>
-          </div>
-          <p class="case-study-meta">
-            Tổng Volumn Search theo nhóm thứ hạng nhóm keyword mục tiêu.
-          </p>
-          <svg class="multi-line-chart" viewBox="0 0 760 320"
-            data-labels="1/6,2/7,9/7,16/7,6/8,27/8,3/9,10/9,17/9,8/10,22/10,29/10,5/11,12/11,19/11,25/11,2/12,9/12,16/12,29/12,31/12"
-            data-series="#1:38525,27470,34770,37750,48925,42390,41420,39700,38900,20155,27125,29295,28685,30670,34385,30000,38010,40825,36050,29615,26665;#2:22865,34400,33410,37355,40580,37045,35100,26325,28825,28305,20010,22745,22140,24125,25860,23040,15510,19880,21380,25050,33720;#3:51350,48120,46010,42335,31865,53455,49680,59960,57640,46070,39135,39410,37095,22365,34250,50360,30185,25215,23510,23465,19215;#4-6:36275,57295,43960,35055,43715,50590,65045,62810,63895,30365,38715,38885,28045,40940,48035,23595,36420,45715,49525,48875,48895;#7-10:28880,11885,20915,27110,16355,12590,8155,10610,9910,13295,26880,18040,20285,17635,17245,13450,19495,12170,11285,9860,12275;#11-20:5565,4720,4850,4445,7070,6135,3490,2720,7210,15280,6275,9205,14345,9800,14495,6280,15470,8780,14185,8695,11355"></svg>
-          <div class="chart-foot">
-            <strong>45% Top 1-3</strong>
-          </div>
-        </article>
-      </div>
-      <div class="section-heading case-heading case-heading-routine reveal">
-        <p class="eyebrow">Case Study 2</p>
-        <h2>TRAFFIC ROUTINE</h2>
-      </div>
-      <div class="case-study-grid">
-        <article class="chart-card case-study-card case-study-wide reveal">
-          <div class="chart-head">
-            <div>
-              <span>ROUTINE Organic Traffic</span>
-              <strong data-counter data-prefix="+" data-count="243" data-suffix="%">+0%</strong>
-            </div>
-            <em>01/2023 - 12/2023</em>
-          </div>
-          <p class="case-study-meta">
-            Tăng 117% Organic Traffic trong 6 tháng đầu, sau 1 năm tăng hơn 243% Organic Sessions và 250% Click.
-          </p>
-          <svg class="line-chart" viewBox="0 0 560 240" data-labels="Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec"
-            data-values="116.56,135.92,131.02,116.33,108.11,91.44,103.80,100.78,110.06,134.93,90.61,100"
-            data-unit="%"></svg>
-          <div class="chart-foot">
-            <span>Organic Traffic theo tháng. Keyword sản phẩm tăng từ 200 lên khoảng 850.</span>
-            <strong>200 → 850 KW</strong>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section-shell" id="workflow"
-      data-guide="Quy trình cho thấy bạn không chỉ có kết quả, mà có cách tạo kết quả." data-pose="timeline">
-      <div class="section-heading narrow reveal">
-        <p class="eyebrow">Quy trình & công cụ</p>
-        <h2>Các đầu công việc chính.</h2>
-      </div>
-      <div class="workflow-grid">
-        <article class="workflow-step reveal">
-          <span>01</span>
-          <h3>Research</h3>
-          <p>Nghiên cứu keyword, insight tìm kiếm, phân tích đối thủ bằng Ahrefs, Keyword Planner, Keywordtool.io.</p>
-        </article>
-        <article class="workflow-step reveal">
-          <span>02</span>
-          <h3>Planning</h3>
-          <p>Xây dựng chiến lược SEO ngắn hạn và dài hạn, chọn keywords mục tiêu và ưu tiên URL triển khai theo yêu cầu
-            từ Ngành Hàng.</p>
-        </article>
-        <article class="workflow-step reveal">
-          <span>03</span>
-          <h3>Production</h3>
-          <ul>
-            <li>Xây dựng guideline cho team content, Mô tả các rule về outline, inlink, outlink và tối ưu nội dung danh
-              mục, sản phẩm, blog.</li>
-            <li>Phối hợp team PM, Design thiết kế giao diện website để tăng tỷ lệ chuyển đổi va fkhoong gây ảnh hưởng
-              đến các yếu tố SEO</li>
-          </ul>
-        </article>
-        <article class="workflow-step reveal">
-          <span>04</span>
-          <h3>Technical</h3>
-          <ul>
-            <li>Audit website định kỳ bằng Ahrefs, Screaming Frog, GSC, GA4 để phát hiện và fix lỗi technical.</li>
-            <li>Mô tả các rule về schema, trạng thái kinh doanh sản phẩm, điều kiện gắn động đáp ứng khả năng index,...
-            </li>
-          </ul>
-        </article>
-        <article class="workflow-step reveal">
-          <span>05</span>
-          <h3>Reporting</h3>
-          <p>Xây dựng dashboard bằng Looker Studio, GA4, GSC và Google Sheets để theo dõi sức khỏe website, các chỉ số
-            quan trọng để kịp thời điều chỉnh.</p>
-        </article>
-        <article class="workflow-step reveal">
-          <span>06</span>
-          <h3>Automation</h3>
-          <p>Kết hợp App Scripts, Codex, n8n và AI tools để tạo workflow đo rank, chọn keywords mục tiêu, viết infobox
-            và tối ưu content.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="skills-band" id="skills" data-guide="Kỹ năng và công cụ nên được scan nhanh, không cần đọc dài."
-      data-pose="chart">
-      <div class="section-shell split-section">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Skills & Tools</p>
-          <h2>Kỹ năng chuyên môn và các công cụ phục vụ công việc.</h2>
-        </div>
-        <div class="skill-cloud reveal" aria-label="Kỹ năng và công cụ">
-          <span>SEO Strategy</span>
-          <span>SEO On-page</span>
-          <span>SEO Audit</span>
-          <span>Keyword Research</span>
-          <span>Competitor Analysis</span>
-          <span>Search Intent</span>
-          <span>Content Planning</span>
-          <span>Link Building</span>
-          <span>Data Analysis</span>
-          <span>Reporting Dashboard</span>
-          <span>Workflow Automation</span>
-          <span>Team Coordination</span>
-          <span>Google Analytics 4</span>
-          <span>Google Search Console</span>
-          <span>Looker Studio</span>
-          <span>Ahrefs</span>
-          <span>Screaming Frog</span>
-          <span>n8n</span>
-          <span>Codex</span>
-          <span>Antigravity</span>
-          <span>Claude</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="credentials-band" data-guide="Chứng nhận nên đi kèm năng lực áp dụng, không chỉ liệt kê tên."
-      data-pose="about">
-      <div class="section-shell compact-band">
-        <div id="certificates" class="section-heading compact-heading reveal">
-          <p class="eyebrow">Bằng cấp & chứng nhận</p>
-          <h2>Quá trình học tập và các chứng chỉ</h2>
-        </div>
-        <div class="credential-list reveal">
-          <article>
-            <h3>Trường Đại học Công Thương Thành phố Hồ Chí Minh</h3>
-            <p>Chuyên ngành: Chemical Engineer, 2014 - 2017.</p>
-          </article>
-          <article>
-            <h3>The Fundamentals of Digital Marketing</h3>
-            <p>Khóa học online từ Google về nền tảng Digital Marketing, kênh tăng trưởng và tư duy đo lường hiệu quả.
-            </p>
-          </article>
-          <article>
-            <h3>AIM Academy & IM Group</h3>
-            <p>Tham gia và hoàn thành các chứng chỉ về Digital Marketing tại AIM Academy và SEO All-in-one tại IM Group.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-shell" id="career" data-guide="Career path giúp HR thấy bạn có định hướng dài hạn."
-      data-pose="chart">
-      <div class="career-panel reveal">
-        <div>
-          <p class="eyebrow">Mong muốn phát triển</p>
-          <h2>Career Path: từ Chuyên gia đến Đội nhóm.</h2>
-        </div>
-        <div class="career-content">
           <p>
-            Với mong muốn phát triển bản thân và thử thách ở một vị trí mới, tôi mong muốn có thể học thêm các kinh
-            nghiệm, kỹ năng phù hợp để phát triển lên vị trí SEO Leader, tập trung xây dựng quy trình SEO hiệu quả,
-            giúp tiết kiệm thời gian, chi phí, áp dụng các kiến thức mới, kỹ năng AI để tối ưu quy trình tự động hóa cho
-            các công việc lặp lại, tạo luồng tăng trưởng bền vững.
+            Có kinh nghiệm xây dựng roadmap, quản lý bộ keyword số lượng lớn, nhiều Ngành hàng, đánh giá mức độ ưu tiên
+            theo từng giai đoạn, quản lý nguồn lực Content và phối hợp với team Product, Dev, Design, IT và Ngành hàng
+            để đạt mục tiêu chuyển đổi chung.
           </p>
-          <div class="reference-grid" aria-label="References">
-            <article>
-              <span>Reference 1</span>
-              <h3>Đào Xuân Hưng</h3>
-              <p>Head of Product<br />Chuỗi Mẹ & Bé AVAKids (MWG)</p>
-              <a href="tel:0915511148"><strong>0915.511.148</strong></a>
+        </div>
+
+        <div class="experience-layout reveal">
+          <div class="experience-tabs" role="tablist" aria-label="Kinh nghiệm làm việc">
+            <button class="experience-tab is-active" type="button" role="tab" aria-selected="true"
+              aria-controls="experience-panel-0" id="experience-tab-0" data-tab="0">
+              <span>09/2024 - 06/2026</span><strong>AVAKids (MWG)</strong>
+            </button>
+            <button class="experience-tab" type="button" role="tab" aria-selected="false"
+              aria-controls="experience-panel-1" id="experience-tab-1" tabindex="-1" data-tab="1">
+              <span>08/2022 - 06/2024</span><strong>ROUTINE</strong>
+            </button>
+            <button class="experience-tab" type="button" role="tab" aria-selected="false"
+              aria-controls="experience-panel-2" id="experience-tab-2" tabindex="-1" data-tab="2">
+              <span>11/2020 - 06/2022</span><strong>Dr. Check Clinic</strong>
+            </button>
+            <button class="experience-tab" type="button" role="tab" aria-selected="false"
+              aria-controls="experience-panel-3" id="experience-tab-3" tabindex="-1" data-tab="3">
+              <span>04/2020 - 11/2020</span><strong>DEVI Kids</strong>
+            </button>
+          </div>
+
+          <div class="experience-panels">
+            <article class="experience-panel is-active" id="experience-panel-0" role="tabpanel"
+              aria-labelledby="experience-tab-0" data-panel="0">
+              <div class="panel-heading">
+                <div>
+                  <p>SEO Specialist</p>
+                  <h3>Chuỗi Mẹ &amp; Bé AVAKids</h3>
+                </div>
+                <span>01</span>
+              </div>
+              <p>
+                Quản lý, xây dựng và triển khai chiến lược SEO 6-12 tháng cho tất cả các danh mục và sản phẩm, kết hợp
+                liên phòng ban để tối ưu UI/UX website, quản lý dữ liệu - thông tin sản phẩm, tối ưu tỷ lệ chuyển đổi.
+              </p>
+              <ul>
+                <li>Hoàn thành gần 91% mục tiêu tăng trưởng đề ra.</li>
+                <li>Tăng 83% Organic Sessions trong 5 tháng đầu.</li>
+                <li>Hơn 45% keyword mục tiêu vào Top 1-3, 35% vào Top 4-10.</li>
+                <li>Hỗ trợ chuyển đổi nền tảng website, đồng bộ dữ liệu tất cả sản phẩm, hình ảnh, nội dung, thông số,
+                  internal links và đề suất các vị trí chuyển đổi tối ưu.</li>
+                <li>Phụ trách và kết hợp team Content, Marketing, Agency để order bài viết của các dự án Backlinks từ
+                  Social, Báo, Guest post,...</li>
+                <li>Kiểm tra và xóa backlink không an toàn, gây ảnh hưởng đến Brand và website định kỳ</li>
+                <li>Hỗ trợ tuyển dụng và hướng dẫn các vị trí Freelancers, đảm bảo thực hiện đúng tiêu chuẩn SEO.</li>
+                <li>Xây dựng Dashboard giúp theo dõi các chỉ số mục tiêu, từ đó đưa ra hành động kịp thời và phù hợp,
+                  xây dựng các công cụ đo lường tự động, tối ưu SEO, quản lý dữ liệu thông qua App Scripts, n8n,
+                  Codex,...</li>
+              </ul>
+              <a href="#case-avakids" class="text-link">Xem Case Study AVAKids</a>
             </article>
-            <article>
-              <span>Reference 02</span>
-              <h3>Trần Ngọc Hùng Quân</h3>
-              <p>SEO Leader<br />Chuỗi Mẹ & Bé AVAKids (MWG)</p>
-              <a href="tel:0961104163"><strong>0961.104.163</strong></a>
+
+            <article class="experience-panel" id="experience-panel-1" role="tabpanel" aria-labelledby="experience-tab-1"
+              data-panel="1" hidden>
+              <div class="panel-heading">
+                <div>
+                  <p>SEO Executive</p>
+                  <h3>ROUTINE</h3>
+                </div>
+                <span>02</span>
+              </div>
+              <p>
+                Xây dựng kế hoạch SEO dài hạn cho website thời trang; quản lý team Content, Intern và Freelancers; phối
+                hợp Design, IT và Developer để cải thiện hiển thị, tối ưu các đầu mục SEO và tăng tủ lệ chuyển đổi.
+              </p>
+              <ul>
+                <li>Tăng 117% Organic Traffic trong 6 tháng đầu.</li>
+                <li>Tăng hơn 243% Organic Sessions và 250% Click sau 1 năm.</li>
+                <li>Mở rộng bộ từ khóa sản phẩm từ 200 lên khoảng 850 keyword.</li>
+                <li>Lập kế hoạch, phân công và kiểm soát chất lượng nội dung theo tháng.</li>
+              </ul>
+              <a href="#case-routine" class="text-link">Xem Case Study ROUTINE</a>
+            </article>
+
+            <article class="experience-panel" id="experience-panel-2" role="tabpanel" aria-labelledby="experience-tab-2"
+              data-panel="2" hidden>
+              <div class="panel-heading">
+                <div>
+                  <p>SEO Executive</p>
+                  <h3>Dr. Check Clinic</h3>
+                </div>
+                <span>03</span>
+              </div>
+              <p>
+                Nghiên cứu từ khóa theo mục tiêu phát triển và nhu cầu tìm kiếm của người dùng, xây dựng outline và nội
+                dung sức khỏe chuẩn SEO; hỗ trợ backlink, website vệ tinh
+                và theo dõi hiệu suất bằng Google Analytics, Search Console và Ahrefs.
+              </p>
+              <ul>
+                <li>Lập kế hoạch và tối ưu SEO cho website mới phát triển.</li>
+                <li>Phụ trách lên kế hoạch, viết và kiểm duyệt tất cả các nội dung trong lĩnh vực Healthcare. Đảm bảo
+                  đáp ứng các yêu cầu của Google và tiêu chuẩn E-E-A-T.</li>
+                <li>Phối hợp cùng Bác sĩ trong quá trình kiểm duyệt, đảm bảo nội dung chính xác, đầy đủ và giải đáp được
+                  paint point của người dùng.</li>
+                <li>Theo dõi thứ hạng từ khóa và lập báo cáo SEO định kỳ.</li>
+              </ul>
+            </article>
+
+            <article class="experience-panel" id="experience-panel-3" role="tabpanel" aria-labelledby="experience-tab-3"
+              data-panel="3" hidden>
+              <div class="panel-heading">
+                <div>
+                  <p>Digital Marketing</p>
+                  <h3>DEVI Kids Import-Export Company</h3>
+                </div>
+                <span>04</span>
+              </div>
+              <p>
+                Lập kế hoạch Facebook Ads, Google Ads; nghiên cứu từ khóa, xây dựng nội dung và hình ảnh sản phẩm;
+                quản trị Facebook và thực hiện báo cáo định kỳ.
+              </p>
+              <ul>
+                <li>Lập kế hoạch, lên nội dung và triển khai nội dung tất cả các nền tảng Organic và Paid Search bao gồm
+                  Google và Facebook.</li>
+                <li>Research từ khóa, lên ý tưởng, viết nội dung, chụp hình sản phẩm, thiết kế hình ảnh cho hệ trang
+                  Blog và bài Social.</li>
+                <li>Chạy quảng cáo Google và Facebook Ads, theo dõi và tối ưu chuyển đổi.</li>
+              </ul>
             </article>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="closing-section" id="contact" data-guide="Kết lại bằng lời mời trao đổi rõ ràng và dễ liên hệ."
-      data-pose="thanks">
-      <div class="section-shell closing-inner reveal">
-        <p class="eyebrow">Lời cảm ơn</p>
-        <h2>Cảm ơn Anh/Chị đã dành thời gian xem portfolio.</h2>
-        <p>
-          Tôi rất mong có cơ hội trao đổi sâu hơn về kinh nghiệm, cách làm việc và những giá trị tôi có thể
-          đóng góp cho Quý công ty trong giai đoạn tiếp theo.
-        </p>
-        <div class="contact-row">
-          <a class="liquid-btn email-action" href="#" data-email-user="th.tuanchau96" data-email-domain="gmail"
-            data-email-tld="com">Gửi email: th.tuanchau96@gmail.com</a>
-          <a class="liquid-btn" href="#top">Lên đầu trang</a>
+    <section class="kpi-band" aria-labelledby="kpiTitle">
+      <div class="section-shell">
+        <div class="kpi-heading reveal">
+          <p class="eyebrow">Kết quả nổi bật</p>
+          <h2 id="kpiTitle">Số liệu tăng trưởng thực tế</h2>
+        </div>
+        <div class="kpi-grid">
+          <article class="kpi-item reveal">
+            <span class="kpi-index">01</span>
+            <strong data-counter data-value="243" data-prefix="+" data-suffix="%">+0%</strong>
+            <h3>Organic Sessions</h3>
+            <p>ROUTINE - sau 1 năm</p>
+          </article>
+          <article class="kpi-item reveal">
+            <span class="kpi-index">02</span>
+            <strong data-counter data-value="250" data-prefix="+" data-suffix="%">+0%</strong>
+            <h3>Organic Clicks</h3>
+            <p>ROUTINE - sau 1 năm</p>
+          </article>
+          <article class="kpi-item reveal">
+            <span class="kpi-index">03</span>
+            <strong data-counter data-value="83" data-prefix="+" data-suffix="%">+0%</strong>
+            <h3>Organic Sessions</h3>
+            <p>AVAKids - 5 tháng đầu</p>
+          </article>
+          <article class="kpi-item reveal">
+            <span class="kpi-index">04</span>
+            <strong data-counter data-value="45" data-suffix="%">0%</strong>
+            <h3>Keywords Top 1-3</h3>
+            <p>Nhóm Ngành hàng mục tiêu</p>
+          </article>
         </div>
       </div>
+    </section>
+
+    <section class="section section-light" id="case-studies" data-nav-section>
+      <div class="section-shell">
+        <div class="chapter-divider reveal">
+          <span>02 / CASE STUDY</span>
+          <span>DATA → ACTION → GROWTH</span>
+        </div>
+
+        <div class="section-intro reveal">
+          <div>
+            <p class="eyebrow">All Projects</p>
+            <h2>Mục tiêu và kết quả</h2>
+          </div>
+          <p>
+            Hai dự án SEO website E-commerce thể hiện khả năng lên chiến lược, Lập kế hoạch, quản lý, tối ưu các chỉ số
+            SEO, các URL ưu tiên và theo dõi hiệu suất chuyển dổi bằng số liệu.
+          </p>
+        </div>
+
+        <article class="case-study reveal" id="case-avakids">
+          <div class="case-copy">
+            <p class="case-number">CASE STUDY 01</p>
+            <h3>AVAKids Growth Traffic</h3>
+            <p class="case-meta">786 URL · ROADMAP 12 THÁNG · E-COMMERCE</p>
+            <p>
+              Xây dựng chiến lược SEO cho nhóm danh mục và sản phẩm mục tiêu, Audit Technical, On-page, Off-page, Link
+              Building, xây dựng rule cho team Content và đề suất giao diện web với PM và IT, xây dựng quy trình,
+              workflow để tiết kiệm thời gian, tăng hiệu suất SEO.
+            </p>
+            <dl class="case-facts">
+              <div>
+                <dt>Mục tiêu</dt>
+                <dd>Tăng 21% Organic Sessions</dd>
+              </div>
+              <div>
+                <dt>Kết quả</dt>
+                <dd>Đạt được 91% Target</dd>
+              </div>
+              <div>
+                <dt>Từ khóa Top 1-3</dt>
+                <dd>45% bộ Keyword mục tiêu</dd>
+              </div>
+            </dl>
+          </div>
+          <div class="chart-stage">
+            <div class="chart-topline"><span>Organic Sessions</span><strong>+83%</strong></div>
+            <svg class="line-chart" viewBox="0 0 760 340" role="img" aria-label="Biểu đồ Organic Sessions AVAKids"
+              data-series-name="Organic Sessions" data-unit="%"
+              data-labels="Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec"
+              data-values="100,100,100,99,99,150,120,108,103,110,112,115"></svg>
+          </div>
+        </article>
+
+        <article class="ranking-study reveal" id="case-avakids-ranking">
+          <div class="ranking-copy">
+            <p class="case-number">AVAKIDS / RANKING REPORT</p>
+            <h3>Keyword Ranking</h3>
+            <p>
+              Tổng Volume Search của bộ từ khóa mục tiêu thay đổi theo thứ hạng từ 1 - 20 (các từ khóa nằm ngoài vị trí
+              20 không check).
+            </p>
+            <div class="ranking-highlight"><strong>45%</strong><span>keyword mục tiêu nằm trong Top 1-3</span></div>
+            <div class="chart-legend" aria-label="Chú giải nhóm thứ hạng">
+              <span style="--legend:#d1ffca">#1</span><span style="--legend:#8ad7ff">#2</span>
+              <span style="--legend:#ffd166">#3</span><span style="--legend:#ff8c78">#4-6</span>
+              <span style="--legend:#c6a7ff">#7-10</span><span style="--legend:#f5f5f5">#11-20</span>
+            </div>
+          </div>
+          <div class="ranking-chart-stage">
+            <div class="chart-topline"><span>Weekly Report</span><strong>VLS by Ranking</strong></div>
+            <svg class="multi-line-chart" viewBox="0 0 900 380" role="img"
+              aria-label="Biểu đồ Search Volume theo nhóm thứ hạng từ khóa AVAKids"
+              data-labels="6/1,7/2,7/9,7/16,8/6,8/27,9/3,9/10,9/17,10/8,10/22,10/29,11/5,11/12,11/19,11/25,12/2,12/9,12/16,12/29,12/31"
+              data-series="#1:38525,27470,34770,37750,48925,42390,41420,39700,38900,20155,27125,29295,28685,30670,34385,30000,38010,40825,36050,29615,26665;#2:22865,34400,33410,37355,40580,37045,35100,26325,28825,28305,20010,22745,22140,24125,25860,23040,15510,19880,21380,25050,33720;#3:51350,48120,46010,42335,31865,53455,49680,59960,57640,46070,39135,39410,37095,22365,34250,50360,30185,25215,23510,23465,19215;#4-6:36275,57295,43960,35055,43715,50590,65045,62810,63895,30365,38715,38885,28045,40940,48035,23595,36420,45715,49525,48875,48895;#7-10:28880,11885,20915,27110,16355,12590,8155,10610,9910,13295,26880,18040,20285,17635,17245,13450,19495,12170,11285,9860,12275;#11-20:5565,4720,4850,4445,7070,6135,3490,2720,7210,15280,6275,9205,14345,9800,14495,6280,15470,8780,14185,8695,11355"></svg>
+          </div>
+        </article>
+
+        <article class="case-study case-study-reverse reveal" id="case-routine">
+          <div class="case-copy">
+            <p class="case-number">CASE STUDY 02</p>
+            <h3>ROUTINE SEO</h3>
+            <p class="case-meta">53 PRODUCT URL · 200 → 850 KEYWORDS · FASHION</p>
+            <p>
+              Mở rộng bộ từ khóa sản phẩm, xây kế hoạch Content và phối hợp Design, IT, Developer để cải thiện Traffic,
+              Ranking, Click và hiệu quả chuyển đổi.
+            </p>
+            <dl class="case-facts">
+              <div>
+                <dt>6 tháng đầu</dt>
+                <dd>Tăng 117% Organic Traffic</dd>
+              </div>
+              <div>
+                <dt>Sau 1 năm</dt>
+                <dd>Tăng 243% Organic Sessions</dd>
+              </div>
+              <div>
+                <dt>Organic Clicks</dt>
+                <dd>Tăng 250%</dd>
+              </div>
+            </dl>
+          </div>
+          <div class="chart-stage chart-stage-light">
+            <div class="chart-topline"><span>Organic Traffic</span><strong>+243%</strong></div>
+            <svg class="line-chart" viewBox="0 0 760 340" role="img" aria-label="Biểu đồ Organic Traffic ROUTINE"
+              data-series-name="Organic Traffic" data-unit="%"
+              data-labels="Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec"
+              data-values="116.56,135.92,131.02,116.33,108.11,91.44,103.80,100.78,110.06,134.93,66.01,100"></svg>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-light process-section" id="process" data-nav-section>
+      <div class="section-shell">
+        <div class="chapter-divider reveal">
+          <span>03 / QUY TRÌNH</span>
+          <span>STRATEGY → AUTOMATION</span>
+        </div>
+
+        <div class="section-intro reveal">
+          <div>
+            <p class="eyebrow">SEO Operating System</p>
+            <h2>Chuyển đổi mục tiêu thành quy trình tự vận hành</h2>
+          </div>
+          <p>
+            Quy trình được thiết kế từ những công việc lặp đi lặp lại hằng ngày nhưng mất nhiều thời gian, giúp team
+            tiết kiệm thời gian, theo dõi dữ liệu quan trọng. Quy trình luôn được xây dựng và tối ưu để cho output tốt
+            nhất và phù hợp nhất.
+          </p>
+        </div>
+
+        <div class="workflow" id="workflow">
+          <div class="workflow-line" aria-hidden="true"><span></span></div>
+          <article class="workflow-step reveal" style="--step-delay: 0ms">
+            <span>01</span>
+            <h3>Research</h3>
+            <p>Nghiên cứu đối thủ, research keyword, phân loại theo Search Intent và keyword gap bằng Ahrefs, Keyword
+              Planner, Keywordtool.io,...</p>
+          </article>
+          <article class="workflow-step reveal" style="--step-delay: 100ms">
+            <span>02</span>
+            <h3>Planning</h3>
+            <p>Xây roadmap từ 6-12 tháng, đặt KPI phù hợp với Traffic, Ranking, Revenue, ưu tiên URL triển khai theo mục
+              tiêu và số
+              lượng nhân sự phụ trách.</p>
+          </article>
+          <article class="workflow-step reveal" style="--step-delay: 300ms">
+            <span>03</span>
+            <h3>Technical</h3>
+            <p>Audit website định kỳ bằng Ahrefs, Screaming Frog, GSC, GA4. Kiểm tra Schema, Indexation, file sitemap,
+              robot.txt, on-page và off-page.</p>
+          </article>
+          <article class="workflow-step reveal" style="--step-delay: 200ms">
+            <span>04</span>
+            <h3>Content</h3>
+            <p>Xây dựng guideline, checklist chung cho từng bộ phận, đề suất Outline, quản lý Internal Link và tối ưu
+              Category, Product, Blog.</p>
+          </article>
+          <article class="workflow-step reveal" style="--step-delay: 400ms">
+            <span>05</span>
+            <h3>Report - Optimize</h3>
+            <p>Xây Dashboard bằng Looker Studio, GA4, GSC, Google Sheets; theo dõi các chỉ số, phát hiện bất thường và
+              đưa ra hành động phù hợp.</p>
+          </article>
+          <article class="workflow-step workflow-step-accent reveal" style="--step-delay: 500ms">
+            <span>06</span>
+            <h3>Automation</h3>
+            <p>Kết hợp Apps Script, Codex, n8n, MCP và AI tools để tự động hóa các quy trình như kiểm tra trạng thái sản
+              phẩm, đo rank keyword, tự viết Content Blog, Product và tối ưu inlink,...</p>
+          </article>
+        </div>
+
+        <div class="automation-panel reveal">
+          <div class="automation-copy">
+            <p class="eyebrow">AI & Automation</p>
+            <h3>Xây dựng các công cụ và workflow hỗ trợ SEO</h3>
+            <p>
+              Kết hợp Codex chạy local, n8n, Apps Script, MCP và AI tools để đo rank, xử lý & phân nhóm keyword, tạo
+              outline, viết content, chèn anchor text và tối ưu content theo từng URL và keyword có sẵn.
+            </p>
+            <div class="tool-list" aria-label="Công cụ automation">
+              <span>CODEX</span><span>N8N</span><span>APPS SCRIPT</span><span>MCP</span><span>AI TOOLS</span>
+            </div>
+          </div>
+          <div class="automation-visual" aria-hidden="true">
+            <div class="automation-visual-ring"></div>
+            <span class="automation-visual-node node-sheet">SHEET</span>
+            <span class="automation-visual-node node-n8n">N8N</span>
+            <span class="automation-visual-node node-codex">CODEX</span>
+            <span class="automation-visual-node node-apps">APPS SCRIPT</span>
+            <span class="automation-visual-node node-qc">QC</span>
+            <div class="automation-visual-core"><span>SEO</span><strong>FLOW</strong></div>
+            <span class="automation-visual-signal"></span>
+            <span class="automation-visual-signal signal-delayed"></span>
+            <span class="automation-visual-label">INPUT → ORCHESTRATE → REVIEW</span>
+          </div>
+        </div>
+
+        <div class="skills-strip reveal" aria-label="Skills and tools">
+          <span>SEO Strategy</span><span>Technical SEO</span><span>Content Planning</span>
+          <span>Data Analysis</span><span>Dashboard Building</span><span>Team Coordination</span>
+          <span>Google Analytics 4</span><span>Google Search Console</span><span>Looker
+            Studio</span><span>Ahrefs</span><span>Screaming Frog</span>
+          <span>Codex</span><span>ChatGPT</span><span>Perflexity</span><span>Claude</span>
+        </div>
+
+        <section class="automation-showcase" id="workflow-tools-automation" aria-labelledby="automationShowcaseTitle">
+          <div class="automation-showcase-head reveal">
+            <div>
+              <p class="eyebrow">Workflow &amp; Tools Automation</p>
+              <h2 id="automationShowcaseTitle">Từ bài toán vận hành đến sản phẩm hỗ trợ SEO</h2>
+            </div>
+            <p>
+              Tôi tự nghiên cứu, thiết kế, xây dựng và tiếp tục tối ưu ba workflow dưới đây. Mỗi flow tập trung vào
+              một chuỗi công việc cụ thể, có điểm kiểm soát để người vận hành theo dõi và điều chỉnh output.
+            </p>
+          </div>
+
+          <article class="workflow-product reveal" data-gallery>
+            <header class="workflow-product-head">
+              <span class="workflow-product-index">01</span>
+              <div>
+                <p class="case-number">SEO OPERATIONS TOOL</p>
+                <h3>Rank Checker</h3>
+                <p>
+                  Kiểm tra thứ hạng theo danh sách keyword trên Sheet, quan sát SERP mobile, ghi lại URL/vị trí và
+                  tiếp tục quy trình sau bước xác minh CAPTCHA.
+                </p>
+              </div>
+              <span class="workflow-status">Đã xây dựng · đang tối ưu</span>
+            </header>
+
+            <ol class="workflow-journey" aria-label="Hành trình Rank Checker">
+              <li>Sheet đầu vào</li><li>Chạy kiểm tra</li><li>SERP mobile</li><li>Ghi kết quả</li><li>CAPTCHA &amp; tiếp tục</li>
+            </ol>
+
+            <div class="workflow-gallery">
+              <figure class="workflow-main-figure">
+                <div class="workflow-main-media">
+                  <img
+                    class="workflow-main-image"
+                    src="workflow/rank-checker/01-sheet-dau-vao.webp"
+                    alt="Sheet đầu vào của Rank Checker với danh sách keyword và các cột kết quả"
+                    width="1600"
+                    height="900"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="workflow-caption" aria-live="polite">
+                  <span class="workflow-caption-step">BƯỚC 01 / 05</span>
+                  <div>
+                    <strong>Sheet đầu vào</strong>
+                    <p>Danh sách keyword và hai nhóm URL được tách cột; người vận hành nhìn ngay dữ liệu cần đo và vị trí sẽ ghi kết quả.</p>
+                  </div>
+                </figcaption>
+              </figure>
+
+              <div class="workflow-gallery-controls">
+                <div class="workflow-gallery-actions">
+                  <button class="workflow-gallery-button" type="button" data-gallery-prev aria-label="Xem bước trước của Rank Checker">← <span>Trước</span></button>
+                  <span class="workflow-gallery-count" data-gallery-count>01 / 05</span>
+                  <button class="workflow-gallery-button" type="button" data-gallery-next aria-label="Xem bước sau của Rank Checker"><span>Sau</span> →</button>
+                </div>
+                <div class="workflow-thumbnails" aria-label="Các bước của Rank Checker">
+                  <button class="workflow-thumbnail is-active" type="button" aria-label="Bước 1: Sheet đầu vào"
+                    data-src="workflow/rank-checker/01-sheet-dau-vao.webp"
+                    data-alt="Sheet đầu vào của Rank Checker với danh sách keyword và các cột kết quả"
+                    data-label="Sheet đầu vào"
+                    data-caption="Danh sách keyword và hai nhóm URL được tách cột; người vận hành nhìn ngay dữ liệu cần đo và vị trí sẽ ghi kết quả.">
+                    <img src="workflow/rank-checker/01-sheet-dau-vao.webp" alt="" width="1600" height="900" loading="lazy" /><span>01</span>
+                  </button>
+                  <button class="workflow-thumbnail" type="button" aria-label="Bước 2: Chạy kiểm tra"
+                    data-src="workflow/rank-checker/02-chay-test-console.webp"
+                    data-alt="Console hiển thị tiến trình kiểm tra thứ hạng theo từng keyword"
+                    data-label="Chạy kiểm tra"
+                    data-caption="Console hiển thị tiến trình theo từng keyword; trạng thái ngắn gọn giúp nhận biết đang chạy, bỏ qua hay cần can thiệp.">
+                    <img src="workflow/rank-checker/02-chay-test-console.webp" alt="" width="1600" height="900" loading="lazy" /><span>02</span>
+                  </button>
+                  <button class="workflow-thumbnail" type="button" aria-label="Bước 3: Xem SERP mobile"
+                    data-src="workflow/rank-checker/03-chrome-mobile-serp.webp"
+                    data-alt="Chrome hiển thị trang kết quả tìm kiếm Google trên viewport mobile"
+                    data-label="SERP mobile"
+                    data-caption="Chrome mô phỏng kết quả tìm kiếm trên mobile; viewport cố định giúp đối chiếu URL và thứ hạng nhất quán.">
+                    <img src="workflow/rank-checker/03-chrome-mobile-serp.webp" alt="" width="1600" height="900" loading="lazy" /><span>03</span>
+                  </button>
+                  <button class="workflow-thumbnail" type="button" aria-label="Bước 4: Ghi kết quả"
+                    data-src="workflow/rank-checker/04-sheet-ket-qua.webp"
+                    data-alt="Sheet kết quả Rank Checker với vị trí, URL tìm thấy và thời gian kiểm tra"
+                    data-label="Ghi kết quả"
+                    data-caption="Rank, URL tìm thấy và thời gian được ghi cạnh dữ liệu đầu vào để người vận hành kiểm tra chéo nhanh.">
+                    <img src="workflow/rank-checker/04-sheet-ket-qua.webp" alt="" width="1600" height="900" loading="lazy" /><span>04</span>
+                  </button>
+                  <button class="workflow-thumbnail" type="button" aria-label="Bước 5: Xử lý CAPTCHA và tiếp tục"
+                    data-src="workflow/rank-checker/05-captcha-resume.webp"
+                    data-alt="Màn hình xử lý CAPTCHA và tiếp tục quy trình Rank Checker"
+                    data-label="CAPTCHA &amp; tiếp tục"
+                    data-caption="Khi Google yêu cầu xác minh, workflow dừng có kiểm soát và tiếp tục từ bước đang xử lý thay vì chạy lại từ đầu.">
+                    <img src="workflow/rank-checker/05-captcha-resume.webp" alt="" width="1600" height="900" loading="lazy" /><span>05</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="workflow-product reveal" data-gallery>
+            <header class="workflow-product-head">
+              <span class="workflow-product-index">02</span>
+              <div>
+                <p class="case-number">CONTENT WORKFLOW V6</p>
+                <h3>Write Content SEO</h3>
+                <p>
+                  Mô phỏng luồng cơ bản từ dữ liệu đầu vào đến bản nháp, bước QC và Sheet kết quả. Phần trình bày chỉ
+                  dùng ảnh đã giản lược, không hiển thị node, prompt hoặc cấu hình chi tiết.
+                </p>
+              </div>
+              <span class="workflow-status workflow-status-demo">Mô phỏng workflow V6 · dữ liệu demo</span>
+            </header>
+
+            <ol class="workflow-journey" aria-label="Hành trình Write Content SEO">
+              <li>Sheet đầu vào</li><li>Chuẩn bị tư liệu</li><li>Tạo bản nháp</li><li>QC &amp; điều chỉnh</li><li>Sheet kết quả</li>
+            </ol>
+
+            <div class="workflow-gallery">
+              <figure class="workflow-main-figure">
+                <div class="workflow-main-media">
+                  <img
+                    class="workflow-main-image"
+                    src="workflow/avakids-infobox-v6/01-sheet-webhook.webp"
+                    alt="Ảnh mô phỏng Sheet đầu vào và Webhook của workflow Write Content SEO"
+                    width="1600"
+                    height="900"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="workflow-caption" aria-live="polite">
+                  <span class="workflow-caption-step">BƯỚC 01 / 05</span>
+                  <div>
+                    <strong>Sheet đầu vào</strong>
+                    <p>Keyword, URL và trạng thái được đặt trong cùng một hàng; webhook nhận đúng item để giữ luồng xử lý theo từng bài.</p>
+                  </div>
+                </figcaption>
+              </figure>
+
+              <div class="workflow-gallery-controls">
+                <div class="workflow-gallery-actions">
+                  <button class="workflow-gallery-button" type="button" data-gallery-prev aria-label="Xem bước trước của Write Content SEO">← <span>Trước</span></button>
+                  <span class="workflow-gallery-count" data-gallery-count>01 / 05</span>
+                  <button class="workflow-gallery-button" type="button" data-gallery-next aria-label="Xem bước sau của Write Content SEO"><span>Sau</span> →</button>
+                </div>
+                <div class="workflow-thumbnails" aria-label="Các bước của Write Content SEO">
+                  <button class="workflow-thumbnail is-active" type="button" aria-label="Bước 1: Sheet đầu vào"
+                    data-src="workflow/avakids-infobox-v6/01-sheet-webhook.webp"
+                    data-alt="Ảnh mô phỏng Sheet đầu vào và Webhook của workflow Write Content SEO"
+                    data-label="Sheet đầu vào"
+                    data-caption="Keyword, URL và trạng thái được đặt trong cùng một hàng; webhook nhận đúng item để giữ luồng xử lý theo từng bài.">
+                    <img src="workflow/avakids-infobox-v6/01-sheet-webhook.webp" alt="" width="1600" height="900" loading="lazy" /><span>01</span>
+                  </button>
+                  <button class="workflow-thumbnail" type="button" aria-label="Bước 2: Chuẩn bị tư liệu"
+                    data-src="workflow/avakids-infobox-v6/02-research-cache.webp"
+                    data-alt="Ảnh mô phỏng khu vực tổng hợp tư liệu nghiên cứu cho bài viết"
+                    data-label="Chuẩn bị tư liệu"
+                    data-caption="Nguồn tham khảo được gom thành một lớp dữ liệu riêng; quyết định này giúp tách phần research khỏi bước viết bản nháp.">
+                    <img src="workflow/avakids-infobox-v6/02-research-cache.webp" alt="" width="1600" height="900" loading="lazy" /><span>02</span>
+                  </button>
+                  <button class="workflow-thumbnail" type="button" aria-label="Bước 3: Tạo bản nháp"
+                    data-src="workflow/avakids-infobox-v6/03-write-article.webp"
+                    data-alt="Ảnh mô phỏng bước tạo bản nháp Content SEO"
+                    data-label="Tạo bản nháp"
+                    data-caption="Bản nháp được tạo theo cấu trúc nội dung đã chuẩn bị; màn hình ưu tiên phần nội dung cần review thay vì cấu hình kỹ thuật.">
+                    <img src="workflow/avakids-infobox-v6/03-write-article.webp" alt="" width="1600" height="900" loading="lazy" /><span>03</span>
+                  </button>
+                  <button class="workflow-thumbnail" type="button" aria-label="Bước 4: QC và điều chỉnh"
+                    data-src="workflow/avakids-infobox-v6/04-qc-repair.webp"
+                    data-alt="Ảnh mô phỏng bước QC và điều chỉnh bản nháp Content SEO"
+                    data-label="QC &amp; điều chỉnh"
+                    data-caption="Các lỗi cần xử lý được đặt cạnh phần điều chỉnh; checkpoint này giữ quyền kiểm soát chất lượng trước khi ghi output.">
+                    <img src="workflow/avakids-infobox-v6/04-qc-repair.webp" alt="" width="1600" height="900" loading="lazy" /><span>04</span>
+                  </button>
+                  <button class="workflow-thumbnail" type="button" aria-label="Bước 5: Sheet kết quả"
+                    data-src="workflow/avakids-infobox-v6/05-output-sheet.webp"
+                    data-alt="Ảnh mô phỏng Sheet kết quả của workflow Write Content SEO"
+                    data-label="Sheet kết quả"
+                    data-caption="Output và trạng thái hoàn tất quay về Sheet; người vận hành có một điểm kiểm tra cuối trước khi dùng nội dung.">
+                    <img src="workflow/avakids-infobox-v6/05-output-sheet.webp" alt="" width="1600" height="900" loading="lazy" /><span>05</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="workflow-product reveal" data-gallery>
+            <header class="workflow-product-head">
+              <span class="workflow-product-index">03</span>
+              <div>
+                <p class="case-number">PRODUCT CONCEPT</p>
+                <h3>SEO - Content App</h3>
+                <p>
+                  Workspace thử nghiệm để quản lý context, evidence, intent, outline và bản nháp trong cùng một luồng.
+                  Đây là UI mô phỏng với dữ liệu demo, không phải kết quả nghiên cứu hoặc chạy AI thật.
+                </p>
+              </div>
+              <span class="workflow-status workflow-status-building">Đang xây dựng &amp; thử nghiệm</span>
+            </header>
+
+            <ol class="workflow-journey" aria-label="Hành trình SEO Content App">
+              <li>Ngữ cảnh Project</li><li>Keyword</li><li>Nghiên cứu nguồn</li><li>Intent &amp; gaps</li><li>Duyệt outline</li><li>Biên tập bản nháp</li>
+            </ol>
+
+            <div class="workflow-gallery">
+              <figure class="workflow-main-figure">
+                <div class="workflow-main-media">
+                  <img
+                    class="workflow-main-image"
+                    src="workflow/seo-content-app/01-project-context.webp"
+                    alt="UI mô phỏng màn hình thiết lập ngữ cảnh Project trong SEO Content App"
+                    width="1600"
+                    height="900"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="workflow-caption" aria-live="polite">
+                  <span class="workflow-caption-step">BƯỚC 01 / 06</span>
+                  <div>
+                    <strong>Ngữ cảnh Project</strong>
+                    <p>Mục tiêu, website, thị trường và đối tượng đọc được khóa từ đầu; các bước sau dùng chung một context đã được duyệt.</p>
+                  </div>
+                </figcaption>
+              </figure>
+
+              <div class="workflow-gallery-controls">
+                <div class="workflow-gallery-actions">
+                  <button class="workflow-gallery-button" type="button" data-gallery-prev aria-label="Xem bước trước của SEO Content App">← <span>Trước</span></button>
+                  <span class="workflow-gallery-count" data-gallery-count>01 / 06</span>
+                  <button class="workflow-gallery-button" type="button" data-gallery-next aria-label="Xem bước sau của SEO Content App"><span>Sau</span> →</button>
+                </div>
+                <div class="workflow-thumbnails" aria-label="Các bước của SEO Content App">
+                  <button class="workflow-thumbnail is-active" type="button" aria-label="Bước 1: Ngữ cảnh Project"
+                    data-src="workflow/seo-content-app/01-project-context.webp"
+                    data-alt="UI mô phỏng màn hình thiết lập ngữ cảnh Project trong SEO Content App"
+                    data-label="Ngữ cảnh Project"
+                    data-caption="Mục tiêu, website, thị trường và đối tượng đọc được khóa từ đầu; các bước sau dùng chung một context đã được duyệt.">
+                    <img src="workflow/seo-content-app/01-project-context.webp" alt="" width="1600" height="900" loading="lazy" /><span>01</span>
+                  </button>
+                  <button class="workflow-thumbnail" type="button" aria-label="Bước 2: Keyword workspace"
+                    data-src="workflow/seo-content-app/02-keyword-workspace.webp"
+                    data-alt="UI mô phỏng workspace quản lý keyword của SEO Content App"
+                    data-label="Keyword workspace"
+                    data-caption="Keyword, trạng thái và bước tiếp theo nằm trong một workspace; thiết kế giúp theo dõi nhiều bài mà không mất context Project.">
+                    <img src="workflow/seo-content-app/02-keyword-workspace.webp" alt="" width="1600" height="900" loading="lazy" /><span>02</span>
+                  </button>
+                  <button class="workflow-thumbnail" type="button" aria-label="Bước 3: Nghiên cứu nguồn"
+                    data-src="workflow/seo-content-app/03-serp-evidence.webp"
+                    data-alt="UI mô phỏng khu vực SERP evidence và nguồn nghiên cứu"
+                    data-label="Nghiên cứu nguồn"
+                    data-caption="Evidence từ SERP và nguồn tham khảo được hiển thị theo từng mục; người review biết thông tin nào đang hỗ trợ quyết định nội dung.">
+                    <img src="workflow/seo-content-app/03-serp-evidence.webp" alt="" width="1600" height="900" loading="lazy" /><span>03</span>
+                  </button>
+                  <button class="workflow-thumbnail" type="button" aria-label="Bước 4: Intent và content gaps"
+                    data-src="workflow/seo-content-app/04-intent-gaps.webp"
+                    data-alt="UI mô phỏng phân tích Search Intent và Content Gaps"
+                    data-label="Intent &amp; content gaps"
+                    data-caption="Intent và khoảng trống nội dung được tách thành các nhóm có thể duyệt; insight được chuyển thành action thay vì chỉ để đọc.">
+                    <img src="workflow/seo-content-app/04-intent-gaps.webp" alt="" width="1600" height="900" loading="lazy" /><span>04</span>
+                  </button>
+                  <button class="workflow-thumbnail" type="button" aria-label="Bước 5: Duyệt outline"
+                    data-src="workflow/seo-content-app/05-outline-review.webp"
+                    data-alt="UI mô phỏng màn hình duyệt outline trước khi viết bài"
+                    data-label="Duyệt outline"
+                    data-caption="Outline có trạng thái duyệt rõ ràng; checkpoint ngăn luồng viết tiếp khi cấu trúc nội dung chưa được xác nhận.">
+                    <img src="workflow/seo-content-app/05-outline-review.webp" alt="" width="1600" height="900" loading="lazy" /><span>05</span>
+                  </button>
+                  <button class="workflow-thumbnail" type="button" aria-label="Bước 6: Biên tập bản nháp"
+                    data-src="workflow/seo-content-app/06-article-editor.webp"
+                    data-alt="UI mô phỏng trình biên tập bản nháp trong SEO Content App"
+                    data-label="Biên tập bản nháp"
+                    data-caption="Editor đặt bản nháp, evidence và trạng thái review trong cùng màn hình; người dùng có thể biên tập trước khi chuyển bước.">
+                    <img src="workflow/seo-content-app/06-article-editor.webp" alt="" width="1600" height="900" loading="lazy" /><span>06</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+    </section>
+
+    <section class="section section-light" id="career" data-nav-section>
+      <div class="section-shell">
+        <div class="chapter-divider reveal">
+          <span>04 / CAREER PATH</span>
+          <span>EXPERTISE → LEADERSHIP</span>
+        </div>
+
+        <div class="career-grid">
+          <div class="career-heading reveal">
+            <p class="eyebrow">Định hướng phát triển</p>
+            <h2>Từ chuyên gia đến đội ngũ</h2>
+            <p>
+              Mong muốn có thể thử sức ở vị trí Leader/Manager, với tinh thần sẵn sàng học hỏi, tiếp thu nhanh, có sẵn
+              quy trình, tập trung chuẩn hóa, hướng dẫn và phát triển năng lực team và tạo tăng
+              trưởng Organic bền vững gắn với mục tiêu kinh doanh.
+            </p>
+          </div>
+          <ol class="career-steps">
+            <li class="reveal"><span>NOW</span><strong>Senior SEO Specialist</strong>
+              <p>Strategy, Technical, Data và Automation.</p>
+            </li>
+            <li class="reveal"><span>NEXT</span><strong>SEO Leader</strong>
+              <p>Team, Roadmap, Stakeholder và Business impact.</p>
+            </li>
+            <li class="reveal"><span>LONG TERM</span><strong>Project / Growth Management</strong>
+              <p>Điều phối tăng trưởng đa kênh và đa phòng ban.</p>
+            </li>
+          </ol>
+        </div>
+
+        <div class="credentials-grid reveal">
+          <article>
+            <p class="eyebrow">Education</p>
+            <h3>HCM University of Industry &amp; Trade</h3>
+            <p>Chemical Engineer · 2014 - 2017</p>
+          </article>
+          <article>
+            <p class="eyebrow">Certificates</p>
+            <ul>
+              <li><strong>The Fundamentals of Digital Marketing</strong><br />Nền tảng Digital Marketing, kênh tăng
+                trưởng và tư duy đo lường.</li>
+              <li><strong>Digital Marketing at AIM Academy</strong></li>
+              <li><strong>SEO All-in-one at IM Group</strong></li>
+            </ul>
+          </article>
+          <article>
+            <p class="eyebrow">References</p>
+            <p><strong>Đào Xuân Hưng</strong><br />Head of Product · AVAKids<br />0915.511.148</p>
+            <p><strong>Trần Ngọc Hùng Quân</strong><br />SEO Leader · AVAKids và An Khang<br />0961.104.163</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact" data-nav-section>
+      <div class="contact-light" aria-hidden="true"></div>
+      <div class="section-shell contact-inner reveal">
+        <div>
+          <p class="eyebrow">05 / LIÊN HỆ</p>
+          <h2>Hãy cùng giải bài toán phát triển doanh nghiệp.</h2>
+        </div>
+        <div class="contact-copy">
+          <p>
+            Tôi mong muốn ứng dụng kinh nghiệm, kỹ năng SEO E-commerce, các quy trình Automation để chuẩn hóa, xây dựng
+            hệ thống tăng trưởng có thể đo lường hiệu quả, tối ưu, tiết kiệm thời gian, chi phí và phát triển doanh
+            nghiệp bền vững.
+          </p>
+          <p class="contact-thanks">Cảm ơn Anh/Chị đã dành thời gian xem portfolio. Tôi mong có cơ hội trao đổi sâu hơn
+            về kinh nghiệm và giá trị có thể đóng góp cho đội ngũ và Quý công ty.</p>
+          <p> </p>
+          <div class="contact-actions">
+            <a class="button button-light magnetic email-action" href="#" data-email-user="th.tuanchau96"
+              data-email-domain="gmail" data-email-tld="com"
+              data-email-subject="Trao đổi cơ hội Senior SEO / SEO Leader">Gửi email</a>
+            <a class="button button-ghost magnetic" href="tel:0819452171">081 945 2171</a>
+          </div>
+        </div>
+        <img src="assets/mascot-thanks.png" alt="Mascot Tuấn gửi lời cảm ơn" />
+      </div>
+      <footer class="site-footer">
+        <span>Châu Thanh Tuấn · SEO Portfolio</span><a href="#top">Lên đầu trang</a>
+      </footer>
     </section>
   </main>
 
-  <div class="experience-modal" id="experienceModal" aria-hidden="true">
-    <div class="modal-backdrop" data-modal-close></div>
-    <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close liquid-btn" type="button" aria-label="Đóng" data-modal-close>×</button>
-      <p class="eyebrow" id="modalEyebrow">Work Experience</p>
-      <h2 id="modalTitle">Chi tiết kinh nghiệm</h2>
-      <div class="modal-body" id="modalBody"></div>
-    </section>
-  </div>
-
-  <script src="script.js?v=20260713-polish-1"></script>
+  <script src="script.js?v=20261005-interactions"></script>
 </body>
 
 </html>
