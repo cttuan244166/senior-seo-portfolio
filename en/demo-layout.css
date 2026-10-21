@@ -1,0 +1,16 @@
+/* English labels share the original demo layout and Vietnamese example data. */
+* { letter-spacing: 0 !important; }
+.heading h1, .titlebar h1 { max-width: 1240px; font-size: 34px; line-height: 1.2; }
+.heading small, .titlebar small { font-size: 14px; }
+.foot { gap: 20px; align-items: center; font-size: 14px; }
+.foot .demo, .foot strong { flex: 0 0 auto; font-size: 12px; }
+.annot { display: flex; align-items: center; gap: 10px; min-height: 52px; max-width: none; font-size: 16px; }
+.annot b { flex: 0 0 28px; margin-right: 0; }
+.page-title { font-size: 25px; }
+.section-head { gap: 16px; }
+.section-head > div { min-width: 0; }
+.panel-head b { font-size: 16px; }
+.review-actions { flex-wrap: wrap; }
+.editor { height: 340px; }
+.editor .review-actions { flex-wrap: nowrap; gap: 6px; }
+.editor .review-actions .btn { height: 34px; padding: 0 8px; font-size: 12px; }

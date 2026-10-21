@@ -217,12 +217,77 @@ h3 {
 }
 
 .menu-toggle {
+  order: 3;
   display: none;
   width: 42px;
   height: 42px;
   padding: 12px 9px;
   border: 0;
   background: transparent;
+}
+
+.language-switch {
+  order: 2;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  margin-left: 12px;
+  padding-left: 12px;
+  border-left: 1px solid currentColor;
+  gap: 2px;
+}
+
+.language-switch a {
+  display: grid;
+  min-width: 36px;
+  min-height: 40px;
+  place-items: center;
+  border-radius: 4px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.language-switch a[aria-current="page"] {
+  color: var(--black);
+  background: var(--mint);
+}
+
+.language-switch a:hover {
+  outline: 1px solid currentColor;
+  outline-offset: -1px;
+}
+
+.language-switch a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.language-switch[aria-busy="true"] {
+  opacity: 0.65;
+}
+
+.language-switch[data-error]::after {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(290px, 80vw);
+  padding: 12px;
+  color: var(--white);
+  background: var(--black);
+  border: 1px solid var(--ash);
+  border-radius: 4px;
+  content: attr(data-error);
+  font-size: 0.8rem;
+}
+
+html.is-switching-language {
+  scroll-behavior: auto !important;
+  overflow-anchor: none;
+}
+
+html.is-switching-language * {
+  overflow-anchor: none;
 }
 
 .menu-toggle>span:not(.sr-only) {
@@ -2250,6 +2315,11 @@ h3 {
     display: block;
   }
 
+  .language-switch {
+    margin-left: auto;
+    padding-left: 8px;
+  }
+
   .nav-links {
     position: fixed;
     top: 78px;
@@ -2548,6 +2618,10 @@ h3 {
 }
 
 @media (max-width: 560px) {
+
+  .brand-name {
+    display: none;
+  }
 
   .section-shell,
   .hero-inner,

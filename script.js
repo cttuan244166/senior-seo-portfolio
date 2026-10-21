@@ -1,4 +1,7 @@
 (() => {
+  let isEnglish = document.documentElement.lang === 'en';
+  let locale = isEnglish ? 'en-US' : 'vi-VN';
+  const galleryControllers = new Map();
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(pointer: fine)').matches;
   const header = document.querySelector('.site-header');
@@ -146,12 +149,15 @@
   });
 
   const emailAction = document.querySelector('[data-email-user][data-email-domain]');
-  if (emailAction) {
+  function updateEmailAction() {
+    if (!emailAction) return;
     const tld = emailAction.dataset.emailTld ? `.${emailAction.dataset.emailTld}` : '';
     const email = `${emailAction.dataset.emailUser}@${emailAction.dataset.emailDomain}${tld}`;
-    emailAction.href = `mailto:${email}`;
-    emailAction.setAttribute('aria-label', `Gửi email đến ${email}`);
+    const subject = emailAction.dataset.emailSubject;
+    emailAction.href = `mailto:${email}${subject ? `?subject=${encodeURIComponent(subject)}` : ''}`;
+    emailAction.setAttribute('aria-label', `${isEnglish ? 'Send email to' : 'Gửi email đến'} ${email}`);
   }
+  updateEmailAction();
 
   function animateCounter(element) {
     if (element.dataset.counted === 'true') return;
@@ -160,7 +166,7 @@
     const prefix = element.dataset.prefix || '';
     const suffix = element.dataset.suffix || '';
     const duration = 3000;
-    const formatter = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 0 });
+    const formatter = new Intl.NumberFormat(locale, { maximumFractionDigits: 0 });
 
     if (reduceMotion) {
       element.textContent = `${prefix}${formatter.format(target)}${suffix}`;
@@ -205,7 +211,7 @@
   document.body.append(chartTooltip);
 
   const multiChartColors = ['#d1ffca', '#8ad7ff', '#ffd166', '#ff8c78', '#c6a7ff', '#f5f5f5'];
-  const formatNumber = (value) => new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 2 }).format(value);
+  const formatNumber = (value) => new Intl.NumberFormat(locale, { maximumFractionDigits: 2 }).format(value);
 
   function buildChart(svg) {
     const rawValues = (svg.dataset.values || '').split(',').map(Number).filter(Number.isFinite);
@@ -226,7 +232,7 @@
 
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
     svg.setAttribute('role', 'img');
-    if (!svg.hasAttribute('aria-label')) svg.setAttribute('aria-label', 'Biểu đồ tăng trưởng SEO');
+    if (!svg.hasAttribute('aria-label')) svg.setAttribute('aria-label', isEnglish ? 'SEO growth chart' : 'Biểu đồ tăng trưởng SEO');
     svg.replaceChildren();
 
     for (let index = 0; index <= 4; index += 1) {
@@ -647,7 +653,7 @@
 
     const padStep = (value) => String(value).padStart(2, '0');
 
-    const updateGallery = (nextIndex, moveFocus = false) => {
+    const updateGallery = (nextIndex, moveFocus = false, centerThumbnail = true) => {
       currentIndex = (nextIndex + thumbnails.length) % thumbnails.length;
       const selected = thumbnails[currentIndex];
       const total = padStep(thumbnails.length);
@@ -661,7 +667,7 @@
       if (mainImage.complete) finishTransition();
       else mainImage.addEventListener('load', finishTransition, { once: true });
 
-      if (captionStep) captionStep.textContent = `BƯỚC ${current} / ${total}`;
+      if (captionStep) captionStep.textContent = `${isEnglish ? 'STEP' : 'BƯỚC'} ${current} / ${total}`;
       if (captionTitle) captionTitle.textContent = selected.dataset.label || '';
       if (captionText) captionText.textContent = selected.dataset.caption || '';
       if (count) count.textContent = `${current} / ${total}`;
@@ -672,7 +678,7 @@
         thumbnail.setAttribute('aria-pressed', String(active));
       });
 
-      if (thumbnailStrip?.scrollTo) {
+      if (centerThumbnail && thumbnailStrip?.scrollTo) {
         const centeredLeft = selected.offsetLeft - (thumbnailStrip.clientWidth - selected.clientWidth) / 2;
         thumbnailStrip.scrollTo({ left: Math.max(centeredLeft, 0), behavior: reduceMotion ? 'auto' : 'smooth' });
       }
@@ -693,7 +699,17 @@
       });
     });
 
+    galleryControllers.set(gallery, () => updateGallery(currentIndex, false, false));
     updateGallery(0);
+  });
+
+  window.addEventListener('portfolio:languagechange', () => {
+    isEnglish = document.documentElement.lang === 'en';
+    locale = isEnglish ? 'en-US' : 'vi-VN';
+    updateEmailAction();
+    galleryControllers.forEach(refresh => refresh());
+    chartTooltip.classList.remove('is-visible');
+    chartTooltip.setAttribute('aria-hidden', 'true');
   });
 
   const hero = document.querySelector('.hero');
